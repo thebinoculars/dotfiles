@@ -1,0 +1,9 @@
+#!/bin/bash
+
+alias cls="clear"
+alias rd="rm -rf"
+alias -- -="cd -"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."

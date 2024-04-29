@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function execute_ecs_command() {
+  if [ -z "$1" ]; then
+    echo "Missing ECS name"
+    return 1
+  fi
+
+  local ecs_name="$1"
+  local region="${2:-$AWS_REGION}"
+
+  aws ecs execute-command --region "$region" --cluster "$ecs_name" \
+    --task "$(aws ecs list-tasks --cluster "$ecs_name" --service-name "$ecs_name" \
+      --output text --query 'taskArns[0]')" --container "$ecs_name" --command "/bin/bash" --interactive
+}
+
+download_one_piece_images() {
+  savePath=$1
+  lastNumber=$2
+
+  for ((i = 1; i <= $lastNumber; i++)); do
+    name=$(printf "%04d" $i)
+    path="${savePath}/${name}.png"
+
+    if [ -f "$path" ]; then
+      continue
+    fi
+
+    folder="${name:0:1}"
+    subFolder="${name:1:1}00"
+    url="https://optc-db.github.io/api/images/full/transparent/${folder}/${subFolder}/${name}.png"
+
+    curl -sS -o "$path" "$url"
+
+    code=$?
+    echo "Get link: ${url}"
+    if [ $code -eq 0 ]; then
+      echo "Downloaded: ${path}"
+    else
+      rm -f "$path"
+      echo "Deleted: ${path}"
+    fi
+  done
+}
