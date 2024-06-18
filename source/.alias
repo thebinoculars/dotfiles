@@ -1,9 +1,50 @@
 #!/bin/bash
 
-alias cls="clear"
-alias rd="rm -rf"
+# navigation
 alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+# pipe
+alias -g H="| head"
+alias -g T="| tail"
+alias -g G="| grep"
+alias -g L="| less"
+alias -g M="| most"
+
+# common
+alias l="ls -hlA"
+alias r="rm -rf"
+
+# composer
+alias c="composer"
+alias ccp="composer create-project"
+alias cda="composer dump-autoload"
+alias ci="composer install"
+alias cr="composer require"
+alias crm="composer remove"
+
+# docker
+alias d="docker"
+alias dp="docker ps"
+alias dpa="docker ps -a"
+alias dil="docker images ls"
+alias dsp="docker system prune"
+alias dc="docker compose"
+alias dce="docker compose exec"
+alias dcp="docker compose ps"
+alias dcu="docker compose up -d"
+alias dcub="docker compose up -d --build"
+alias dcd="docker compose down"
+alias dcl="docker compose logs -f -n 100"
+
+# yarn
+alias y="yarn"
+alias ya="yarn add"
+alias yad="yarn add --dev"
+alias yb="yarn build"
+alias yd="yarn dev"
+alias yr="yarn remove"
+alias ys="yarn start"

@@ -4,12 +4,24 @@ BASE_DIR="$HOME/.dot"
 ZSHRC_FILE="$HOME/.zshrc"
 DOT_FILES_DIR="$BASE_DIR/dot"
 SOURCE_FILES_DIR="$BASE_DIR/source"
+PLUGINS=(
+  'alias-finder'
+  'copyfile'
+  'dircycle'
+  'dotenv'
+  'git'
+  'safe-paste'
+  'sudo'
+  'zsh-autosuggestions'
+  'zsh-history-substring-search'
+  'zsh-syntax-highlighting'
+  'zsh-navigation-tools'
+)
 PACKAGES=(
   'git'
   'vim'
   'zsh'
   'nginx'
-  'mysql-server'
   'jq'
 )
 
@@ -92,3 +104,16 @@ for file in "$SOURCE_FILES_DIR"/.*; do
     fi
   fi
 done
+
+update_zsh_plugins() {
+  echo "Updating Zsh plugins in $ZSHRC_FILE..."
+
+  plugins_line="plugins=(${PLUGINS[*]})"
+  if grep -q "^plugins=" "$ZSHRC_FILE"; then
+    sed -i "s/^plugins=.*/$plugins_line/" "$ZSHRC_FILE"
+  else
+    echo "$plugins_line" >> "$ZSHRC_FILE"
+  fi
+}
+
+update_zsh_plugins
