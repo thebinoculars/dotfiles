@@ -6,11 +6,14 @@ DOT_FILES_DIR="$DOTFILES_DIR/dot"
 PACKAGES_DIR="$DOTFILES_DIR/packages"
 SOURCE_FILES_DIR="$DOTFILES_DIR/source"
 PACKAGES=(
+  'ffmpeg'
+  'fzf'
   'git'
+  'jq'
+  'nginx'
+  'ripgrep'
   'vim'
   'zsh'
-  'nginx'
-  'jq'
 )
 
 install_packages() {
