@@ -5,9 +5,8 @@
 [format]
   pretty = full
 [alias]
-  pc = "!git push origin HEAD"
   up = "!f() { git checkout $1 && git pull origin $1; }; f"
-  de = "!f() { git branch | grep -v "$1" | xargs git branch -D; }; f"
+  prune = "!f() { git branch | grep -v "$1" | xargs git branch -D; }; f"
 [user]
   email = vndhero@gmail.com
   name = Hero
