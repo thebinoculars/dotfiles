@@ -6,6 +6,9 @@ DOT_FILES_DIR="$DOTFILES_DIR/dot"
 PACKAGES_DIR="$DOTFILES_DIR/packages"
 SOURCE_FILES_DIR="$DOTFILES_DIR/source"
 PACKAGES=(
+  'bat'
+  'build-essential'
+  'fd-find'
   'ffmpeg'
   'fzf'
   'git'
@@ -50,11 +53,6 @@ setup_dotfiles() {
     if [ -f "$file" ]; then
       file_name=$(basename "$file")
       target_file="$HOME/$file_name"
-
-      if [ -e "$target_file" ]; then
-        echo "Backing up $target_file..."
-        mv "$target_file" "$target_file.bak"
-      fi
 
       echo "Creating symlink from $file to $target_file"
       ln -sf "$file" "$target_file"

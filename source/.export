@@ -2,3 +2,6 @@
 
 export EDITOR="vim"
 export HISTSIZE=10000
+
+export FZF_DEFAULT_OPTS='--preview "batcat --style=numbers --color=always {}"'
+export FZF_DEFAULT_COMMAND='fd --type f'
