@@ -17,6 +17,14 @@ ecs_exec() {
       --output text --query 'taskArns[0]')" --container "$ecs_name" --command "/bin/bash" --interactive
 }
 
+_fzf_compgen_path() {
+  fdfind --hidden --follow --exclude ".git" . "$1"
+}
+
+_fzf_compgen_dir() {
+  fdfind --type d --hidden --follow --exclude ".git" . "$1"
+}
+
 _fzf_comprun() {
   local command=$1
   shift

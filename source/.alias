@@ -48,3 +48,7 @@ alias yb="yarn build"
 alias yd="yarn dev"
 alias yr="yarn remove"
 alias ys="yarn start"
+
+# fzf
+export FZF_COMPLETION_TRIGGER="*"
+export FZF_COMPLETION_OPTS="--border --info=inline"
