@@ -8,6 +8,7 @@ SOURCE_FILES_DIR="$DOTFILES_DIR/source"
 PACKAGES=(
   'bat'
   'build-essential'
+  'bpytop'
   'fd-find'
   'ffmpeg'
   'fzf'
