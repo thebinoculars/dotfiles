@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Check if rclone is already installed
 if command -v rclone >/dev/null 2>&1; then
   echo "rclone has already been installed"
   return

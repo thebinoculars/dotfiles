@@ -9,8 +9,8 @@ PACKAGES=(
   'ffmpeg'
   'fzf'
   'git'
-  'jq'
   'nginx'
+  'ranger'
   'ripgrep'
   'vim'
   'zsh'
@@ -39,12 +39,12 @@ install_packages() {
 
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
-    echo "$DOTFILES_DIR already exists. Updating from git..."
-    git -C "$DOTFILES_DIR" pull origin master
-  else
-    echo "Creating $DOTFILES_DIR..."
-    git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
+    echo "Backing up existing $DOTFILES_DIR..."
+    mv "$DOTFILES_DIR" "$DOTFILES_DIR.bak"
   fi
+
+  echo "Cloning $DOTFILES_DIR..."
+  git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
 
   for file in "$DOT_FILES_DIR"/.*; do
     if [ -f "$file" ]; then
