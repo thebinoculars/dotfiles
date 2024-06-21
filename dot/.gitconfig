@@ -15,11 +15,11 @@
 [push]
   default = simple
 [rebase]
-	autoStash = true
+  autoStash = true
 [fetch]
-	prune = true
+  prune = true
 [grep]
-	lineNumber = true
+  lineNumber = true
 [credential]
   helper = store
 [pager]

@@ -56,6 +56,11 @@ setup_dotfiles() {
       file_name=$(basename "$file")
       target_file="$HOME/$file_name"
 
+      if [ -e "$target_file" ]; then
+        echo "Backing up $target_file..."
+        mv "$target_file" "$target_file.bak"
+      fi
+
       echo "Creating symlink from $file to $target_file"
       ln -sf "$file" "$target_file"
     fi
