@@ -1,6 +1,6 @@
 [core]
   editor = vim
-  pager = less -FRX
+  pager = diff-so-fancy | less --tabs=4 -RFX
   autocrlf = input
 [format]
   pretty = full
@@ -24,3 +24,18 @@
   helper = store
 [pager]
   branch = false
+[color]
+  ui = true
+  diff-highlight.oldNormal    = red bold
+  diff-highlight.oldHighlight = red bold 52
+  diff-highlight.newNormal    = green bold
+  diff-highlight.newHighlight = green bold 22
+  diff.meta       = yellow
+  diff.frag       = magenta
+  diff.func       = 146
+  diff.context    = normal
+  diff.old        = red bold
+  diff.new        = green bold
+  diff.whitespace = red reverse
+[interactive]
+  diffFilter = diff-so-fancy --patch

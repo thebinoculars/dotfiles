@@ -18,3 +18,5 @@ export FZF_CTRL_R_OPTS="
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'eza --tree --color=always {} | head -200'"
+export FZF_COMPLETION_TRIGGER="*"
+export FZF_COMPLETION_OPTS="--border --info=inline"

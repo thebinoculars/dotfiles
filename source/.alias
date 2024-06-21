@@ -14,10 +14,6 @@ alias -g G="| grep"
 alias -g L="| less"
 alias -g M="| most"
 
-# common
-alias l="ls -hlA"
-alias r="rm -rf"
-
 # composer
 alias c="composer"
 alias ccp="composer create-project"
@@ -49,6 +45,3 @@ alias yd="yarn dev"
 alias yr="yarn remove"
 alias ys="yarn start"
 
-# fzf
-export FZF_COMPLETION_TRIGGER="*"
-export FZF_COMPLETION_OPTS="--border --info=inline"

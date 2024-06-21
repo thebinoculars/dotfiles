@@ -5,4 +5,5 @@ if command -v rclone >/dev/null 2>&1; then
   return
 fi
 
-sudo -v ; curl https://rclone.org/install.sh | sudo bash
+sudo -v
+curl https://rclone.org/install.sh | sudo bash
