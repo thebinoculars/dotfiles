@@ -44,8 +44,7 @@ install_packages() {
 
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
-    echo "Backing up existing $DOTFILES_DIR..."
-    mv "$DOTFILES_DIR"/* "$DOTFILES_DIR.bak/"
+    rm -rf "$DOTFILES_DIR"
   fi
 
   echo "Cloning $DOTFILES_DIR..."
