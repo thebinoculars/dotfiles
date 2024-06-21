@@ -33,9 +33,17 @@ install_packages() {
     fi
   done
 
+  source "oh-my-zsh.sh"
+
   for script in "$PACKAGES_DIR"/*.sh; do
     if [ -f "$script" ]; then
       package_name=$(basename "$script" .sh)
+
+      if command -v "$package_name" >/dev/null 2>&1; then
+        echo "$package_name has already been installed"
+        continue
+      fi
+
       echo "Running custom installation script for $package_name..."
       source "$script"
     fi
@@ -54,11 +62,6 @@ setup_dotfiles() {
     if [ -f "$file" ]; then
       file_name=$(basename "$file")
       target_file="$HOME/$file_name"
-
-      if [ -e "$target_file" ]; then
-        echo "Backing up $target_file..."
-        mv "$target_file" "$target_file.bak"
-      fi
 
       echo "Creating symlink from $file to $target_file"
       ln -sf "$file" "$target_file"

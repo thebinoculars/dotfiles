@@ -20,3 +20,5 @@ export FZF_ALT_C_OPTS="
   --preview 'eza --tree --color=always {} | head -200'"
 export FZF_COMPLETION_TRIGGER="*"
 export FZF_COMPLETION_OPTS="--border --info=inline"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

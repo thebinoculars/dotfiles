@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if command -v docker >/dev/null 2>&1; then
-  echo "docker has already been installed"
-  return
-fi
-
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
