@@ -12,6 +12,4 @@ plugins=(alias-finder copyfile dircycle dotenv fzf git safe-paste sudo zsh-autos
 
 source $ZSH/oh-my-zsh.sh
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
 eval "$(zoxide init zsh)"
