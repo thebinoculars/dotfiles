@@ -18,14 +18,6 @@ alias -g M="| most"
 alias e="eza -lT"
 alias r="rm -rf"
 
-# composer
-alias c="composer"
-alias ccp="composer create-project"
-alias cda="composer dump-autoload"
-alias ci="composer install"
-alias cr="composer require"
-alias crm="composer remove"
-
 # docker
 alias d="docker"
 alias dp="docker ps"
