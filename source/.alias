@@ -14,6 +14,10 @@ alias -g G="| grep"
 alias -g L="| less"
 alias -g M="| most"
 
+# common
+alias e="eza -lT"
+alias r="rm -rf"
+
 # composer
 alias c="composer"
 alias ccp="composer create-project"

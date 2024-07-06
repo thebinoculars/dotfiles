@@ -15,40 +15,18 @@ PACKAGES=(
   'git'
   'jq'
   'nginx'
-  'ranger'
   'ripgrep'
   'vim'
   'zsh'
 )
-
-install_packages() {
-  for package in "${PACKAGES[@]}"; do
-    if dpkg -s "$package" >/dev/null 2>&1; then
-      echo "$package has already been installed"
-    else
-      echo "Installing $package..."
-      sudo apt update
-      sudo apt install -y "$package"
-      echo "$package has been successfully installed"
-    fi
-  done
-
-  source "oh-my-zsh.sh"
-
-  for script in "$PACKAGES_DIR"/*.sh; do
-    if [ -f "$script" ]; then
-      package_name=$(basename "$script" .sh)
-
-      if command -v "$package_name" >/dev/null 2>&1; then
-        echo "$package_name has already been installed"
-        continue
-      fi
-
-      echo "Running custom installation script for $package_name..."
-      source "$script"
-    fi
-  done
-}
+declare -A RELEASES=(
+  ["diff-so-fancy"]="so-fancy/diff-so-fancy"
+  ["dive"]="wagoodman/dive"
+  ["grex"]="pemistahl/grex"
+  ["lazygit"]="jesseduffield/lazygit"
+  ["ouch"]="ouch-org/ouch"
+  ["sd"]="chmln/sd"
+)
 
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
@@ -79,9 +57,53 @@ setup_dotfiles() {
   done
 }
 
+install_packages() {
+  for package in "${PACKAGES[@]}"; do
+    if dpkg -s "$package" >/dev/null 2>&1; then
+      echo "$package has already been installed"
+    else
+      echo "Installing $package..."
+      sudo apt update
+      sudo apt install -y "$package"
+      echo "$package has been successfully installed"
+    fi
+  done
+
+  source "oh-my-zsh.sh"
+
+  for script in "$PACKAGES_DIR"/*.sh; do
+    if [ -f "$script" ]; then
+      package=$(basename "$script" .sh)
+
+      if command -v "$package" >/dev/null 2>&1; then
+        echo "$package has already been installed"
+        continue
+      fi
+
+      echo "Running custom installation script for $package_name..."
+      source "$script"
+    fi
+  done
+}
+
+install_releases() {
+  for package in "${!RELEASES[@]}"; do
+    repo_url=${RELEASES["$package"]}
+
+    if command -v "$package" >/dev/null 2>&1; then
+      echo "$package has already been installed"
+    else
+      echo "Installing $package from repository https://github.com/$repo_url..."
+      sudo eget "$repo_url"
+      echo "$package has been successfully installed"
+    fi
+  done
+}
+
 initialize() {
   setup_dotfiles
   install_packages
+  install_releases
 }
 
 initialize

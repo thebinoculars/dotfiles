@@ -1,0 +1,11 @@
+[global]
+target = "/usr/local/bin"
+
+["wagoodman/dive"]
+asset_filters = [".tar.gz"]
+
+["ouch-org/ouch"]
+asset_filters = ["gnu"]
+
+["chmln/sd"]
+asset_filters = ["gnu"]
