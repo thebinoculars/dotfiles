@@ -98,13 +98,11 @@ install_packages() {
 
 install_releases() {
   for package in "${!RELEASES[@]}"; do
-    repo_url=${RELEASES["$package"]}
-
     if command -v "$package" >/dev/null 2>&1; then
       echo "$package has already been installed"
     else
-      echo "Installing $package from repository https://github.com/$repo_url..."
-      sudo eget "$repo_url"
+      echo "Installing release for $package"
+      EGET_CONFIG="$HOME/.eget.toml" sudo -E eget "${RELEASES["$package"]}"
       echo "$package has been successfully installed"
     fi
   done
