@@ -13,10 +13,12 @@ PACKAGES=(
   'ffmpeg'
   'fzf'
   'git'
+  'glances'
   'jq'
   'nginx'
   'ripgrep'
   'vim'
+  'xsel'
   'zsh'
 )
 declare -A RELEASES=(
@@ -25,9 +27,9 @@ declare -A RELEASES=(
   ["grex"]="pemistahl/grex"
   ["lazygit"]="jesseduffield/lazygit"
   ["ouch"]="ouch-org/ouch"
+  ["procs"]="dalance/procs"
   ["sd"]="chmln/sd"
 )
-
 declare -A ENV_VARS=(
   ["GIT_USERNAME"]="${GIT_USERNAME:-Hero}"
   ["GIT_EMAIL"]="${GIT_EMAIL:-vndhero@gmail.com}"
