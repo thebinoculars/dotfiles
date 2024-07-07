@@ -28,6 +28,11 @@ declare -A RELEASES=(
   ["sd"]="chmln/sd"
 )
 
+declare -A ENV_VARS=(
+  ["GIT_USERNAME"]="${GIT_USERNAME:-Hero}"
+  ["GIT_EMAIL"]="${GIT_EMAIL:-vndhero@gmail.com}"
+)
+
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
     rm -rf "$DOTFILES_DIR"
@@ -40,6 +45,11 @@ setup_dotfiles() {
     if [ -f "$file" ]; then
       file_name=$(basename "$file")
       target_file="$HOME/$file_name"
+
+      for key in "${!ENV_VARS[@]}"; do
+        value="${ENV_VARS[$key]}"
+        sed -i "s/{{${key}}}/$value/g" "$file"
+      done
 
       echo "Creating symlink from $file to $target_file"
       ln -sf "$file" "$target_file"
@@ -80,7 +90,7 @@ install_packages() {
         continue
       fi
 
-      echo "Running custom installation script for $package_name..."
+      echo "Running custom installation script for $package..."
       source "$script"
     fi
   done
