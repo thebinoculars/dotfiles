@@ -12,6 +12,7 @@ PACKAGES=(
   'fd-find'
   'ffmpeg'
   'fzf'
+  'git-extras'
   'git'
   'glances'
   'jq'
