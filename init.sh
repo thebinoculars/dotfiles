@@ -36,60 +36,57 @@ setup_dotfiles() {
   git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
 
   for file in "$DOT_FILES_DIR"/.*; do
-    if [ -f "$file" ]; then
-      file_name=$(basename "$file")
-      target_file="$HOME/$file_name"
+    file_name=$(basename "$file")
+    target_file="$HOME/$file_name"
 
-      for key in "${!ENV_VARS[@]}"; do
-        value="${ENV_VARS[$key]}"
-        sed -i "s/{{${key}}}/$value/g" "$file"
-      done
+    for key in "${!ENV_VARS[@]}"; do
+      value="${ENV_VARS[$key]}"
+      sed -i "s/{{${key}}}/$value/g" "$file"
+    done
 
-      echo "Creating symlink from $file to $target_file"
-      ln -sf "$file" "$target_file"
-    fi
+    echo "Creating symlink from $file to $target_file"
+    ln -sf "$file" "$target_file"
   done
 
   for file in "$SOURCE_FILES_DIR"/.*; do
-    if [ -f "$file" ]; then
-      source_command="source $file"
-      if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
-        echo "Adding source command to $ZSHRC_FILE..."
-        echo "$source_command" >>"$ZSHRC_FILE"
-      fi
+    source_command="source $file"
+    if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
+      echo "Adding source command to $ZSHRC_FILE..."
+      echo "$source_command" >>"$ZSHRC_FILE"
     fi
   done
 }
 
 install_packages() {
+  sudo apt update
+
   for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" >/dev/null 2>&1; then
       echo "$package has already been installed"
-    else
-      echo "Installing $package..."
-      sudo apt update
-      sudo apt install -y "$package"
-      echo "$package has been successfully installed"
+      continue
     fi
+
+    echo "Installing $package..."
+    sudo apt install -y "$package"
   done
 
   source "oh-my-zsh.sh"
 
   for script in "$PACKAGES_DIR"/*.sh; do
-    if [ -f "$script" ]; then
-      package=$(basename "$script" .sh)
+    package=$(basename "$script" .sh)
 
-      if command -v "$package" >/dev/null 2>&1; then
-        echo "$package has already been installed"
-        continue
-      fi
-
-      echo "Running custom installation script for $package..."
-      source "$script"
+    if command -v "$package" >/dev/null 2>&1; then
+      echo "$package has already been installed"
+      continue
     fi
+
+    echo "Installing $package..."
+    source "$script"
   done
 
-  EGET_CONFIG="$HOME/.eget.toml" sudo -E eget -D --upgrade-only
+  if command -v "eget" >/dev/null 2>&1; then
+    EGET_CONFIG="$HOME/.eget.toml" sudo -E eget -D
+  fi
 }
 
 initialize() {
