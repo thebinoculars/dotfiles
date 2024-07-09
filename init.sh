@@ -36,30 +36,32 @@ setup_dotfiles() {
   git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
 
   for file in "$DOT_FILES_DIR"/.*; do
-    file_name=$(basename "$file")
-    target_file="$HOME/$file_name"
+    if [ -f "$file" ]; then
+      file_name=$(basename "$file")
+      target_file="$HOME/$file_name"
 
-    for key in "${!ENV_VARS[@]}"; do
-      value="${ENV_VARS[$key]}"
-      sed -i "s/{{${key}}}/$value/g" "$file"
-    done
+      for key in "${!ENV_VARS[@]}"; do
+        value="${ENV_VARS[$key]}"
+        sed -i "s/{{${key}}}/$value/g" "$file"
+      done
 
-    echo "Creating symlink from $file to $target_file"
-    ln -sf "$file" "$target_file"
+      echo "Creating symlink from $file to $target_file"
+      ln -sf "$file" "$target_file"
+    fi
   done
 
   for file in "$SOURCE_FILES_DIR"/.*; do
-    source_command="source $file"
-    if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
-      echo "Adding source command to $ZSHRC_FILE..."
-      echo "$source_command" >>"$ZSHRC_FILE"
+    if [ -f "$file" ]; then
+      source_command="source $file"
+      if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
+        echo "Adding source command to $ZSHRC_FILE..."
+        echo "$source_command" >>"$ZSHRC_FILE"
+      fi
     fi
   done
 }
 
 install_packages() {
-  sudo apt update
-
   for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" >/dev/null 2>&1; then
       echo "$package has already been installed"
@@ -67,6 +69,7 @@ install_packages() {
     fi
 
     echo "Installing $package..."
+    sudo apt update
     sudo apt install -y "$package"
   done
 
