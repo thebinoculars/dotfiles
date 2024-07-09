@@ -1,11 +1,26 @@
 [global]
-target = "/usr/local/bin"
-
-["wagoodman/dive"]
-asset_filters = [".tar.gz"]
-
-["ouch-org/ouch"]
-asset_filters = ["gnu"]
+upgrade_only = true
 
 ["chmln/sd"]
 asset_filters = ["gnu"]
+target = "/usr/local/bin/sd"
+
+["dalance/procs"]
+target = "/usr/local/bin/procs"
+
+["jesseduffield/lazygit"]
+target = "/usr/local/bin/lazygit"
+
+["ouch-org/ouch"]
+asset_filters = ["gnu"]
+target = "/usr/local/bin/ouch"
+
+["pemistahl/grex"]
+target = "/usr/local/bin/grex"
+
+["so-fancy/diff-so-fancy"]
+target = "/usr/local/bin/diff-so-fancy"
+
+["wagoodman/dive"]
+asset_filters = [".tar.gz"]
+target = "/usr/local/bin/dive"

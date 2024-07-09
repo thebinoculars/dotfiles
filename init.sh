@@ -22,15 +22,6 @@ PACKAGES=(
   'xsel'
   'zsh'
 )
-declare -A RELEASES=(
-  ["diff-so-fancy"]="so-fancy/diff-so-fancy"
-  ["dive"]="wagoodman/dive"
-  ["grex"]="pemistahl/grex"
-  ["lazygit"]="jesseduffield/lazygit"
-  ["ouch"]="ouch-org/ouch"
-  ["procs"]="dalance/procs"
-  ["sd"]="chmln/sd"
-)
 declare -A ENV_VARS=(
   ["GIT_USERNAME"]="${GIT_USERNAME:-Hero}"
   ["GIT_EMAIL"]="${GIT_EMAIL:-vndhero@gmail.com}"
@@ -97,24 +88,13 @@ install_packages() {
       source "$script"
     fi
   done
-}
 
-install_releases() {
-  for package in "${!RELEASES[@]}"; do
-    if command -v "$package" >/dev/null 2>&1; then
-      echo "$package has already been installed"
-    else
-      echo "Installing release for $package"
-      EGET_CONFIG="$HOME/.eget.toml" sudo -E eget "${RELEASES["$package"]}"
-      echo "$package has been successfully installed"
-    fi
-  done
+  EGET_CONFIG="$HOME/.eget.toml" sudo -E eget -D --upgrade-only
 }
 
 initialize() {
   setup_dotfiles
   install_packages
-  install_releases
 }
 
 initialize
