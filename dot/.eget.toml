@@ -11,6 +11,10 @@ target = "/usr/local/bin/procs"
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
+["jkfran/killport"]
+asset_filters = ["x86_64-linux-gnu"]
+target = "/usr/local/bin/killport"
+
 ["ouch-org/ouch"]
 asset_filters = ["gnu"]
 target = "/usr/local/bin/ouch"
@@ -28,3 +32,11 @@ target = "/usr/local/bin/dasel"
 ["wagoodman/dive"]
 asset_filters = [".tar.gz"]
 target = "/usr/local/bin/dive"
+
+["wtfutil/wtf"]
+asset_filters = ["linux_amd64"]
+target = "/usr/local/bin/wtf"
+
+["yudai/gotty"]
+asset_filters = ["linux_amd64"]
+target = "/usr/local/bin/gotty"
