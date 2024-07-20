@@ -8,6 +8,9 @@ target = "/usr/local/bin/sd"
 ["dalance/procs"]
 target = "/usr/local/bin/procs"
 
+["denisidoro/navi"]
+target = "/usr/local/bin/navi"
+
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
