@@ -14,6 +14,9 @@ target = "/usr/local/bin/navi"
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
+["jhspetersson/fselect"]
+target = "/usr/local/bin/fselect"
+
 ["jkfran/killport"]
 asset_filters = ["x86_64-linux-gnu"]
 target = "/usr/local/bin/killport"
@@ -25,12 +28,18 @@ target = "/usr/local/bin/ouch"
 ["pemistahl/grex"]
 target = "/usr/local/bin/grex"
 
+["sniptt-official/ots"]
+target = "/usr/local/bin/ots"
+
 ["so-fancy/diff-so-fancy"]
 target = "/usr/local/bin/diff-so-fancy"
 
 ["TomWright/dasel"]
 asset_filters = ["linux_amd64", "gz"]
 target = "/usr/local/bin/dasel"
+
+["tstack/lnav"]
+target = "/usr/local/bin/lnav"
 
 ["wagoodman/dive"]
 asset_filters = [".tar.gz"]

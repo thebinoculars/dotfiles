@@ -31,6 +31,7 @@ alias dcu="docker compose up -d"
 alias dcub="docker compose up -d --build"
 alias dcd="docker compose down"
 alias dcl="docker compose logs -f -n 100"
+alias dcr="docker compose restart"
 
 # yarn
 alias y="yarn"
@@ -40,4 +41,3 @@ alias yb="yarn build"
 alias yd="yarn dev"
 alias yr="yarn remove"
 alias ys="yarn start"
-

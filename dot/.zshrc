@@ -10,6 +10,7 @@ plugins=(
   dotenv
   fzf
   git
+  git-extra-commands
   git-extras
   safe-paste
   sudo

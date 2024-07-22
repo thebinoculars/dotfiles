@@ -5,25 +5,6 @@ DOTFILES_DIR="$HOME/.dotfiles"
 DOT_FILES_DIR="$DOTFILES_DIR/dot"
 PACKAGES_DIR="$DOTFILES_DIR/packages"
 SOURCE_FILES_DIR="$DOTFILES_DIR/source"
-PACKAGES=(
-  'bat'
-  'build-essential'
-  'duf'
-  'fd-find'
-  'ffmpeg'
-  'fzf'
-  'git-extras'
-  'git'
-  'glances'
-  'hyperfine'
-  'jq'
-  'nginx'
-  'ripgrep'
-  'tmux'
-  'vim'
-  'xsel'
-  'zsh'
-)
 declare -A ENV_VARS=(
   ["GIT_USERNAME"]="${GIT_USERNAME:-Hero}"
   ["GIT_EMAIL"]="${GIT_EMAIL:-vndhero@gmail.com}"
@@ -64,6 +45,7 @@ setup_dotfiles() {
 }
 
 install_packages() {
+  mapfile -t PACKAGES < "$DOTFILES_DIR/packages.txt"
   for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" >/dev/null 2>&1; then
       echo "$package has already been installed"
