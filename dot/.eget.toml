@@ -21,12 +21,18 @@ target = "/usr/local/bin/fselect"
 asset_filters = ["x86_64-linux-gnu"]
 target = "/usr/local/bin/killport"
 
+["kha7iq/pingme"]
+target = "/usr/local/bin/pingme"
+
 ["ouch-org/ouch"]
 asset_filters = ["gnu"]
 target = "/usr/local/bin/ouch"
 
 ["pemistahl/grex"]
 target = "/usr/local/bin/grex"
+
+["pvolok/mprocs"]
+target = "/usr/local/bin/mprocs"
 
 ["sniptt-official/ots"]
 target = "/usr/local/bin/ots"
@@ -37,9 +43,6 @@ target = "/usr/local/bin/diff-so-fancy"
 ["TomWright/dasel"]
 asset_filters = ["linux_amd64", "gz"]
 target = "/usr/local/bin/dasel"
-
-["tstack/lnav"]
-target = "/usr/local/bin/lnav"
 
 ["wagoodman/dive"]
 asset_filters = [".tar.gz"]

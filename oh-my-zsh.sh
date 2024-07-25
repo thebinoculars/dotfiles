@@ -24,3 +24,21 @@ repos=(
 for repo in "${repos[@]}"; do
   git clone "$repo" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$(basename "$repo" .git)"
 done
+
+ZSH_WIDGET="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/widget"
+if [ ! -d "$ZSH_WIDGET" ]; then
+  echo "Creating ZSH_WIDGET directory..."
+  mkdir -p "$ZSH_WIDGET"
+fi
+
+echo "Installing fzf-help..."
+FZF_HELP_DIR="$ZSH_WIDGET/fzf-help"
+if [ ! -d "$FZF_HELP_DIR" ]; then
+  mkdir -p "$FZF_HELP_DIR"
+fi
+
+tmp_dir=$(mktemp -d)
+git clone https://github.com/BartSte/fzf-help.git "$tmp_dir"
+cp "$tmp_dir/src/"* "$FZF_HELP_DIR"
+cp "$tmp_dir/uninstall" "$FZF_HELP_DIR"
+rm -rf "$tmp_dir"
