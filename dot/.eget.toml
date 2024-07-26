@@ -11,6 +11,9 @@ target = "/usr/local/bin/procs"
 ["denisidoro/navi"]
 target = "/usr/local/bin/navi"
 
+["ericchiang/pup"]
+target = "/usr/local/bin/pup"
+
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
@@ -30,6 +33,10 @@ target = "/usr/local/bin/ouch"
 
 ["pemistahl/grex"]
 target = "/usr/local/bin/grex"
+
+["phiresky/ripgrep-all"]
+all = true
+target = "/usr/local/bin/rga"
 
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"

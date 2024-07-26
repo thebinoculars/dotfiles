@@ -1,5 +1,6 @@
 bat
 build-essential
+crudini
 duf
 fd-find
 ffmpeg
@@ -9,10 +10,10 @@ git-extras
 glances
 hyperfine
 jq
+lnav
 nginx
 rclone
 ripgrep
-lnav
 tmate
 tmux
 vim
