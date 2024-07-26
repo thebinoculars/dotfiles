@@ -36,7 +36,7 @@ target = "/usr/local/bin/grex"
 
 ["phiresky/ripgrep-all"]
 all = true
-target = "/usr/local/bin/rga"
+target = "/usr/local/bin"
 
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
