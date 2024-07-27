@@ -1,6 +1,13 @@
 [global]
 upgrade_only = true
 
+["asciinema/agg"]
+asset_filters = ["gnu"]
+target = "/usr/local/bin/agg"
+
+["boyter/scc"]
+target = "/usr/local/bin/scc"
+
 ["chmln/sd"]
 asset_filters = ["gnu"]
 target = "/usr/local/bin/sd"
@@ -41,9 +48,6 @@ target = "/usr/local/bin"
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
 
-["sniptt-official/ots"]
-target = "/usr/local/bin/ots"
-
 ["so-fancy/diff-so-fancy"]
 target = "/usr/local/bin/diff-so-fancy"
 
@@ -54,6 +58,9 @@ target = "/usr/local/bin/dasel"
 ["wagoodman/dive"]
 asset_filters = [".tar.gz"]
 target = "/usr/local/bin/dive"
+
+["WindSoilder/hors"]
+target = "/usr/local/bin/hors"
 
 ["wtfutil/wtf"]
 asset_filters = ["linux_amd64"]

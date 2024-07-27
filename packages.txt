@@ -1,3 +1,4 @@
+asciinema
 bat
 build-essential
 crudini
@@ -8,12 +9,14 @@ fzf
 git
 git-extras
 glances
+htop
 hyperfine
 jq
 lnav
 nginx
 rclone
 ripgrep
+termshark
 tmate
 tmux
 vim
