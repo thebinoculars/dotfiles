@@ -15,11 +15,8 @@ target = "/usr/local/bin/sd"
 ["dalance/procs"]
 target = "/usr/local/bin/procs"
 
-["denisidoro/navi"]
-target = "/usr/local/bin/navi"
-
-["ericchiang/pup"]
-target = "/usr/local/bin/pup"
+["dandavison/delta"]
+target = "/usr/local/bin/delta"
 
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
@@ -48,9 +45,6 @@ target = "/usr/local/bin"
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
 
-["so-fancy/diff-so-fancy"]
-target = "/usr/local/bin/diff-so-fancy"
-
 ["TomWright/dasel"]
 asset_filters = ["linux_amd64", "gz"]
 target = "/usr/local/bin/dasel"
@@ -62,9 +56,8 @@ target = "/usr/local/bin/dive"
 ["WindSoilder/hors"]
 target = "/usr/local/bin/hors"
 
-["wtfutil/wtf"]
-asset_filters = ["linux_amd64"]
-target = "/usr/local/bin/wtf"
+["xyproto/orbiton"]
+target = "/usr/local/bin/o"
 
 ["yudai/gotty"]
 asset_filters = ["linux_amd64"]

@@ -6,6 +6,7 @@ duf
 fd-find
 ffmpeg
 fzf
+gdu
 git
 git-extras
 glances
@@ -13,6 +14,7 @@ htop
 hyperfine
 jq
 lnav
+magic-wormhole
 nginx
 rclone
 ripgrep

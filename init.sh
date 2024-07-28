@@ -37,7 +37,7 @@ setup_dotfiles() {
     if [ -f "$file" ]; then
       source_command="source $file"
       if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
-        echo "Adding source command to $ZSHRC_FILE..."
+        echo "Adding $source_command to $ZSHRC_FILE..."
         echo "$source_command" >>"$ZSHRC_FILE"
       fi
     fi
