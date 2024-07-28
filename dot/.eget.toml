@@ -45,6 +45,9 @@ target = "/usr/local/bin"
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
 
+["TaKO8Ki/gobang"]
+target = "/usr/local/bin/gobang"
+
 ["TomWright/dasel"]
 asset_filters = ["linux_amd64", "gz"]
 target = "/usr/local/bin/dasel"
