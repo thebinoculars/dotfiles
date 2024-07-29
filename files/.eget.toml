@@ -2,21 +2,22 @@
 upgrade_only = true
 
 ["asciinema/agg"]
-asset_filters = ["gnu"]
 target = "/usr/local/bin/agg"
+asset_filters = ["gnu"]
 
 ["boyter/scc"]
 target = "/usr/local/bin/scc"
 
 ["chmln/sd"]
-asset_filters = ["gnu"]
 target = "/usr/local/bin/sd"
+asset_filters = ["gnu"]
 
 ["dalance/procs"]
 target = "/usr/local/bin/procs"
 
 ["dandavison/delta"]
 target = "/usr/local/bin/delta"
+asset_filters = ["gnu"]
 
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
@@ -25,15 +26,15 @@ target = "/usr/local/bin/lazygit"
 target = "/usr/local/bin/fselect"
 
 ["jkfran/killport"]
-asset_filters = ["x86_64-linux-gnu"]
 target = "/usr/local/bin/killport"
+asset_filters = ["x86_64-linux-gnu"]
 
 ["kha7iq/pingme"]
 target = "/usr/local/bin/pingme"
 
 ["ouch-org/ouch"]
-asset_filters = ["gnu"]
 target = "/usr/local/bin/ouch"
+asset_filters = ["gnu"]
 
 ["pemistahl/grex"]
 target = "/usr/local/bin/grex"
@@ -49,12 +50,12 @@ target = "/usr/local/bin/mprocs"
 target = "/usr/local/bin/gobang"
 
 ["TomWright/dasel"]
-asset_filters = ["linux_amd64", "gz"]
 target = "/usr/local/bin/dasel"
+asset_filters = ["linux_amd64", "gz"]
 
 ["wagoodman/dive"]
-asset_filters = [".tar.gz"]
 target = "/usr/local/bin/dive"
+asset_filters = [".tar.gz"]
 
 ["WindSoilder/hors"]
 target = "/usr/local/bin/hors"
@@ -63,5 +64,5 @@ target = "/usr/local/bin/hors"
 target = "/usr/local/bin/o"
 
 ["yudai/gotty"]
-asset_filters = ["linux_amd64"]
 target = "/usr/local/bin/gotty"
+asset_filters = ["linux_amd64"]
