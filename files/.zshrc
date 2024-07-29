@@ -31,6 +31,9 @@ source $ZSH/oh-my-zsh.sh
 # carapace
 source <(carapace _carapace)
 
+# fx
+source <(fx --comp zsh)
+
 # fzf-help
 source $ZSH_CUSTOM/widget/fzf-help/fzf-help.zsh
 zle -N fzf-help-widget

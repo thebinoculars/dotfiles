@@ -29,6 +29,9 @@ target = "/usr/local/bin/fselect"
 target = "/usr/local/bin/killport"
 asset_filters = ["x86_64-linux-gnu"]
 
+["kellyjonbrazil/jc"]
+target = "/usr/local/bin/jc"
+
 ["kha7iq/pingme"]
 target = "/usr/local/bin/pingme"
 
@@ -48,6 +51,9 @@ target = "/usr/local/bin/mprocs"
 
 ["TaKO8Ki/gobang"]
 target = "/usr/local/bin/gobang"
+
+["tomnomnom/gron"]
+target = "/usr/local/bin/gron"
 
 ["TomWright/dasel"]
 target = "/usr/local/bin/dasel"
