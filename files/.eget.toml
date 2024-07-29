@@ -1,6 +1,9 @@
 [global]
 upgrade_only = true
 
+["antonmedv/fx"]
+target = "/usr/local/bin/fx"
+
 ["asciinema/agg"]
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
