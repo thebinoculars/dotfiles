@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set +e
+set -e
 
 ZSHRC_FILE="$HOME/.zshrc"
 DOTFILES_DIR="$HOME/.dotfiles"
@@ -49,19 +49,14 @@ setup_dotfiles() {
 }
 
 install_packages() {
-  mapfile -t PACKAGES <"$DOTFILES_DIR/packages.txt"
-  sudo apt update
-  for package in "${PACKAGES[@]}"; do
-    if dpkg -s "$package" >/dev/null 2>&1; then
-      echo "$package has already been installed"
-      continue
-    fi
+  if [ -f "$DOTFILES_DIR/packages.txt" ]; then
+    echo "Updating package list..."
+    sudo apt update
+    echo "Installing packages..."
+    sudo xargs -a "$DOTFILES_DIR/packages.txt" apt install -y
+  fi
 
-    echo "Installing $package..."
-    sudo apt install -y "$package"
-  done
-
-  source "oh-my-zsh.sh"
+  source "$DOTFILES_DIR/oh-my-zsh.sh"
 
   for script in "$DOTFILES_DIR"/packages/*.sh; do
     package=$(basename "$script" .sh)
@@ -86,5 +81,3 @@ initialize() {
 }
 
 initialize
-
-set -e

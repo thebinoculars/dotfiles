@@ -69,9 +69,6 @@ asset_filters = [".tar.gz"]
 ["WindSoilder/hors"]
 target = "/usr/local/bin/hors"
 
-["xyproto/orbiton"]
-target = "/usr/local/bin/o"
-
 ["yudai/gotty"]
 target = "/usr/local/bin/gotty"
 asset_filters = ["linux_amd64"]
