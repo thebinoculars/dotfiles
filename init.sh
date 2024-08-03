@@ -17,8 +17,8 @@ setup_dotfiles() {
   echo "Cloning $DOTFILES_DIR..."
   git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
 
-  find "$DOTFILES_DIR/links" -type f | while read -r file; do
-    relative_path="${file#$DOTFILES_DIR/links/}"
+  find "$DOTFILES_DIR/files" -type f | while read -r file; do
+    relative_path="${file#$DOTFILES_DIR/files/}"
     target_file="$HOME/$relative_path"
     target_dir="$(dirname "$target_file")"
 
@@ -32,11 +32,11 @@ setup_dotfiles() {
       rm -f "$target_file"
     fi
 
-    echo "Creating symlink from $file to $target_file"
-    ln -s "$file" "$target_file"
+    echo "Copying $file to $target_file"
+    cp "$file" "$target_file"
   done
 
-  for file in "$DOTFILES_DIR"/source/.*; do
+  for file in "$DOTFILES_DIR/sources/.*"; do
     if [ -f "$file" ]; then
       source_command="source $file"
       if ! grep -qF "$source_command" "$ZSHRC_FILE"; then
