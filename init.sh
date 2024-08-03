@@ -18,7 +18,7 @@ setup_dotfiles() {
   git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
 
   find "$DOTFILES_DIR/links" -type f | while read -r file; do
-    relative_path="${file#$DOTFILES_DIR/files/}"
+    relative_path="${file#$DOTFILES_DIR/links/}"
     target_file="$HOME/$relative_path"
     target_dir="$(dirname "$target_file")"
 
