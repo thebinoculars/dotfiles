@@ -52,6 +52,10 @@ target = "/usr/local/bin"
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
 
+["sxyazi/yazi"]
+target = "/usr/local/bin/yazi"
+asset_filters = ["gnu"]
+
 ["TaKO8Ki/gobang"]
 target = "/usr/local/bin/gobang"
 
