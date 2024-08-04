@@ -2,8 +2,3 @@
 on   = "<Esc>"
 run  = "close"
 desc = "Cancel input"
-
-[opener]
-edit = [
-  { run = 'code "$@"' },
-]
