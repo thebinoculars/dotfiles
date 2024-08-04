@@ -2,8 +2,8 @@
 on   = "<Esc>"
 run  = "close"
 desc = "Cancel input"
-[[manager.prepend_keymap]]
-on  = "y"
-run = [ '''
-	shell 'echo "$@" | xclip -i -selection clipboard -t text/uri-list' --confirm
-''', "yank" ]
+
+[opener]
+edit = [
+  { run = 'code "$@"' },
+]
