@@ -15,7 +15,7 @@ alias -g L="| less"
 alias -g M="| most"
 
 # common
-alias e="eza -lgh --git --octal-permissions --time-style '+%Y-%m-%d %H:%M:%S'"
+alias e="eza -algh --git --octal-permissions --time-style '+%Y-%m-%d %H:%M:%S'"
 alias r="rm -rf"
 
 # docker

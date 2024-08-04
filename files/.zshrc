@@ -48,3 +48,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # dotfiles
+source "$HOME/.zsh/.alias"
+source "$HOME/.zsh/.export"
+source "$HOME/.zsh/.function"
