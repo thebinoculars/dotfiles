@@ -27,10 +27,13 @@ setup_dotfiles() {
       mkdir -p "$target_dir"
     fi
 
-    if [ -f "$target_file" ] || [ -L "$target_file" ]; then
-      echo "Removing existing file or symlink $target_file"
-      rm -f "$target_file"
-    fi
+    for key in "${!ENV_VARS[@]}"; do
+      value="${ENV_VARS[$key]}"
+      sed -i "s/{{${key}}}/$value/g" "$file"
+    done
+
+    echo "Removing existing file $target_file"
+    rm -f "$target_file"
 
     echo "Copying $file to $target_file"
     cp "$file" "$target_file"
