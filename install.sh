@@ -63,7 +63,7 @@ install_packages() {
   done
 
   if command -v "eget" >/dev/null 2>&1; then
-    EGET_CONFIG="$HOME/.eget.toml" sudo -E eget -D
+    sudo -E eget -D
   fi
 }
 

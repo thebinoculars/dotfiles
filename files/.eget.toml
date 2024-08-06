@@ -54,7 +54,7 @@ target = "/usr/local/bin/mprocs"
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
-asset_filters = ["gnu"]
+asset_filters = ["gnu", "zip"]
 
 ["TaKO8Ki/gobang"]
 target = "/usr/local/bin/gobang"

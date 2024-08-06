@@ -7,10 +7,8 @@ fd-find
 ffmpeg
 fzf
 gdu
-git
 git-extras
 glances
-htop
 hyperfine
 jq
 lnav
@@ -20,8 +18,6 @@ rclone
 ripgrep
 termshark
 tmate
-tmux
-vim
 visidata
 xsel
 zoxide
