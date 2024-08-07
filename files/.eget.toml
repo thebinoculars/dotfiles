@@ -73,6 +73,14 @@ asset_filters = [".tar.gz"]
 ["WindSoilder/hors"]
 target = "/usr/local/bin/hors"
 
+["xo/usql"]
+target = "/usr/local/bin/usql"
+asset_filters = ["^static"]
+
 ["yudai/gotty"]
 target = "/usr/local/bin/gotty"
 asset_filters = ["linux_amd64"]
+
+["zyedidia/micro"]
+target = "/usr/local/bin/micro"
+asset_filters = ["^static"]
