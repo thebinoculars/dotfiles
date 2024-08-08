@@ -38,6 +38,9 @@ target = "/usr/local/bin/jc"
 ["kha7iq/pingme"]
 target = "/usr/local/bin/pingme"
 
+["mithrandie/csvq"]
+target = "/usr/local/bin/csvq"
+
 ["ouch-org/ouch"]
 target = "/usr/local/bin/ouch"
 asset_filters = ["gnu"]
