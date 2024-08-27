@@ -40,7 +40,7 @@ source <(carapace _carapace)
 source <(fx --comp zsh)
 
 # fzf-help
-source $HOME/.fzf/fzf-help.zsh
+source /usr/share/fzf-help/fzf-help.zsh
 zle -N fzf-help-widget
 bindkey "^A" fzf-help-widget
 

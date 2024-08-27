@@ -8,11 +8,6 @@ target = "/usr/local/bin/fx"
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
 
-["BartSte/fzf-help"]
-target = "~/.fzf"
-all = true
-download_source = true
-
 ["boyter/scc"]
 target = "/usr/local/bin/scc"
 
