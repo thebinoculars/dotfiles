@@ -28,6 +28,11 @@ zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 
 source $ZSH/oh-my-zsh.sh
 
+# dotfiles
+source "$HOME/.zsh/.alias"
+source "$HOME/.zsh/.export"
+source "$HOME/.zsh/.function"
+
 # carapace
 source <(carapace _carapace)
 
@@ -35,7 +40,7 @@ source <(carapace _carapace)
 source <(fx --comp zsh)
 
 # fzf-help
-source $ZSH_CUSTOM/widget/fzf-help/fzf-help.zsh
+source $HOME/.fzf/fzf-help.zsh
 zle -N fzf-help-widget
 bindkey "^A" fzf-help-widget
 
@@ -46,8 +51,3 @@ eval "$(zoxide init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# dotfiles
-source "$HOME/.zsh/.alias"
-source "$HOME/.zsh/.export"
-source "$HOME/.zsh/.function"

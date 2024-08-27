@@ -5,12 +5,13 @@ set -e
 ZSHRC_FILE="$HOME/.zshrc"
 DOTFILES_DIR="$HOME/.dotfiles"
 declare -A ENV_VARS=(
-  ["GIT_USERNAME"]="${GIT_USERNAME:-Hero}"
-  ["GIT_EMAIL"]="${GIT_EMAIL:-vndhero@gmail.com}"
+  ["GIT_USERNAME"]="${GIT_USERNAME:-User}"
+  ["GIT_EMAIL"]="${GIT_EMAIL:-email@example.com}"
 )
 
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
+    echo "Removing existing $DOTFILES_DIR..."
     rm -rf "$DOTFILES_DIR"
   fi
 
@@ -23,7 +24,7 @@ setup_dotfiles() {
     target_dir="$(dirname "$target_file")"
 
     if [ ! -d "$target_dir" ]; then
-      echo "Creating directory $target_dir"
+      echo "Creating directory $target_dir..."
       mkdir -p "$target_dir"
     fi
 
@@ -32,10 +33,10 @@ setup_dotfiles() {
       sed -i "s/{{${key}}}/$value/g" "$file"
     done
 
-    echo "Removing existing file $target_file"
+    echo "Removing existing file $target_file..."
     rm -f "$target_file"
 
-    echo "Copying $file to $target_file"
+    echo "Copying $file to $target_file..."
     cp "$file" "$target_file"
   done
 }
@@ -54,7 +55,7 @@ install_packages() {
     package=$(basename "$script" .sh)
 
     if command -v "$package" >/dev/null 2>&1; then
-      echo "$package has already been installed"
+      echo "$package has already been installed."
       continue
     fi
 
@@ -63,6 +64,7 @@ install_packages() {
   done
 
   if command -v "eget" >/dev/null 2>&1; then
+    echo "Installing packages with eget"
     sudo -E eget -D
   fi
 }
