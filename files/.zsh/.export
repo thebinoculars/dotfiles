@@ -3,6 +3,8 @@
 export EDITOR="vim"
 export HISTSIZE=10000
 
+export NVM_DIR="$HOME/.nvm"
+
 export FZF_DEFAULT_OPTS="--preview 'batcat --style=numbers --color=always {}'"
 export FZF_DEFAULT_COMMAND="fdfind --type f"
 export FZF_CTRL_T_OPTS="

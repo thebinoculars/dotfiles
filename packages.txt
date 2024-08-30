@@ -20,7 +20,9 @@ ripgrep
 termshark
 thefuck
 tmate
+unzip
 visidata
 xsel
+zip
 zoxide
 zsh
