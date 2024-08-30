@@ -86,4 +86,4 @@ asset_filters = ["linux_amd64"]
 
 ["zyedidia/micro"]
 target = "/usr/local/bin/micro"
-asset_filters = ["^static"]
+asset_filters = ["tar.gz", "^static", "^sha"]
