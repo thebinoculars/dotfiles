@@ -17,6 +17,7 @@ alias -g M="| most"
 # common
 alias b="batcat"
 alias e="eza -algh --git --octal-permissions --time-style '+%Y-%m-%d %H:%M:%S'"
+alias m="micro"
 alias r="rm -rf"
 
 # docker

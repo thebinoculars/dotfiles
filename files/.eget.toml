@@ -8,6 +8,9 @@ target = "/usr/local/bin/fx"
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
 
+["benibela/xidel"]
+target = "/usr/local/bin/xidel"
+
 ["boyter/scc"]
 target = "/usr/local/bin/scc"
 
