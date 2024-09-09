@@ -25,6 +25,9 @@ target = "/usr/local/bin/procs"
 target = "/usr/local/bin/delta"
 asset_filters = ["gnu"]
 
+["F1bonacc1/process-compose"]
+target = "/usr/local/bin/process-compose"
+
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
@@ -35,6 +38,9 @@ target = "/usr/local/bin/fselect"
 target = "/usr/local/bin/killport"
 asset_filters = ["x86_64-linux-gnu"]
 
+["joehillen/sysz"]
+target = "/usr/local/bin/sysz"
+
 ["kellyjonbrazil/jc"]
 target = "/usr/local/bin/jc"
 
@@ -44,9 +50,17 @@ target = "/usr/local/bin/pingme"
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
 
+["mylxsw/redis-tui"]
+target = "/usr/local/bin/redis-tui"
+asset_filters = ["^arm"]
+
 ["ouch-org/ouch"]
 target = "/usr/local/bin/ouch"
 asset_filters = ["gnu"]
+
+["peltho/tufw"]
+target = "/usr/local/bin/tufw"
+asset_filters = ["tar.gz"]
 
 ["pemistahl/grex"]
 target = "/usr/local/bin/grex"
