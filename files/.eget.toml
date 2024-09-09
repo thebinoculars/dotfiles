@@ -41,6 +41,9 @@ asset_filters = ["x86_64-linux-gnu"]
 ["joehillen/sysz"]
 target = "/usr/local/bin/sysz"
 
+["Julien-cpsn/ATAC"]
+target = "/usr/local/bin/atac"
+
 ["kellyjonbrazil/jc"]
 target = "/usr/local/bin/jc"
 
