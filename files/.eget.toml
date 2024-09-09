@@ -46,6 +46,7 @@ target = "/usr/local/bin/atac"
 
 ["kellyjonbrazil/jc"]
 target = "/usr/local/bin/jc"
+asset_filters = ["gnu"]
 
 ["kha7iq/pingme"]
 target = "/usr/local/bin/pingme"
