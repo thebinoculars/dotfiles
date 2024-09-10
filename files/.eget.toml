@@ -41,6 +41,9 @@ asset_filters = ["x86_64-linux-gnu"]
 ["joehillen/sysz"]
 target = "/usr/local/bin/sysz"
 
+["jorgerojas26/lazysql"]
+target = "/usr/local/bin/lazysql"
+
 ["Julien-cpsn/ATAC"]
 target = "/usr/local/bin/atac"
 
@@ -79,9 +82,6 @@ target = "/usr/local/bin/mprocs"
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
 asset_filters = ["gnu", "zip"]
-
-["TaKO8Ki/gobang"]
-target = "/usr/local/bin/gobang"
 
 ["tomnomnom/gron"]
 target = "/usr/local/bin/gron"
