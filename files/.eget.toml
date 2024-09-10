@@ -46,13 +46,11 @@ target = "/usr/local/bin/lazysql"
 
 ["Julien-cpsn/ATAC"]
 target = "/usr/local/bin/atac"
+asset_filters = ["gnu"]
 
 ["kellyjonbrazil/jc"]
 target = "/usr/local/bin/jc"
 asset_filters = ["gnu"]
-
-["kha7iq/pingme"]
-target = "/usr/local/bin/pingme"
 
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
