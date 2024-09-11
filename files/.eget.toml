@@ -31,9 +31,6 @@ asset_filters = ["gnu"]
 ["F1bonacc1/process-compose"]
 target = "/usr/local/bin/process-compose"
 
-["guumaster/hostctl"]
-target = "/usr/local/bin/hostctl"
-
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
