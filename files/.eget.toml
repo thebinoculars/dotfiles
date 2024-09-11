@@ -78,6 +78,7 @@ target = "/usr/local/bin/mprocs"
 
 ["RustScan/RustScan"]
 target = "/usr/local/bin/rustscan"
+asset_filters = ["zip"]
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
