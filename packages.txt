@@ -12,10 +12,14 @@ git-extras
 glances
 hyperfine
 iredis
+jc
 jq
 lnav
 magic-wormhole
 nginx
+nmap
+pandoc
+poppler-utils
 rclone
 ripgrep
 termshark

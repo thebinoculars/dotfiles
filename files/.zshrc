@@ -5,9 +5,12 @@ ZSH_THEME="agnosterzak"
 plugins=(
   alias-finder
   colored-man-pages
+  copybuffer
   copyfile
+  copypath
   dircycle
   dotenv
+  extract
   fzf
   git
   git-extra-commands

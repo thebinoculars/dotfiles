@@ -4,6 +4,9 @@ upgrade_only = true
 ["antonmedv/fx"]
 target = "/usr/local/bin/fx"
 
+["ariasmn/ugm"]
+target = "/usr/local/bin/ugm"
+
 ["asciinema/agg"]
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
@@ -28,6 +31,9 @@ asset_filters = ["gnu"]
 ["F1bonacc1/process-compose"]
 target = "/usr/local/bin/process-compose"
 
+["guumaster/hostctl"]
+target = "/usr/local/bin/hostctl"
+
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
 
@@ -48,10 +54,6 @@ target = "/usr/local/bin/lazysql"
 target = "/usr/local/bin/atac"
 asset_filters = ["gnu"]
 
-["kellyjonbrazil/jc"]
-target = "/usr/local/bin/jc"
-asset_filters = ["gnu"]
-
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
 
@@ -67,15 +69,15 @@ asset_filters = ["gnu"]
 target = "/usr/local/bin/tufw"
 asset_filters = ["tar.gz"]
 
-["pemistahl/grex"]
-target = "/usr/local/bin/grex"
-
 ["phiresky/ripgrep-all"]
 all = true
 target = "/usr/local/bin"
 
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
+
+["RustScan/RustScan"]
+target = "/usr/local/bin/rustscan"
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
@@ -91,9 +93,6 @@ asset_filters = ["linux_amd64", "gz"]
 ["wagoodman/dive"]
 target = "/usr/local/bin/dive"
 asset_filters = [".tar.gz"]
-
-["WindSoilder/hors"]
-target = "/usr/local/bin/hors"
 
 ["xo/usql"]
 target = "/usr/local/bin/usql"
