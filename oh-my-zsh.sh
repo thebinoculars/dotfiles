@@ -9,8 +9,6 @@ echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "Installing agnosterzak theme..."
-sudo apt update
-sudo apt install -y fonts-powerline ttf-ancient-fonts
 curl http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme -Lo "$HOME/.oh-my-zsh/themes/agnosterzak.zsh-theme"
 
 echo "Installing Zsh plugins..."
