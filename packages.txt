@@ -21,6 +21,7 @@ lnav
 lolcat
 magic-wormhole
 most
+nala
 nginx
 nmap
 pandoc
