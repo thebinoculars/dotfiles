@@ -27,6 +27,9 @@ for repo in "${repos[@]}"; do
   git clone "$repo" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$(basename "$repo" .git)"
 done
 
+# Setup plugins
+git clone https://github.com/asdf-vm/asdf ~/.asdf
+
 tmp_dir=$(mktemp -d)
 git clone https://github.com/BartSte/fzf-help.git $tmp_dir
 $tmp_dir/install
