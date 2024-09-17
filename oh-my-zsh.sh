@@ -13,10 +13,14 @@ curl http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterz
 
 echo "Installing Zsh plugins..."
 repos=(
+  "https://github.com/Aloxaf/fzf-tab"
+  "https://github.com/MichaelAquilina/zsh-you-should-use"
+  "https://github.com/tom-auger/cmdtime"
+  "https://github.com/unixorn/git-extra-commands"
+  "https://github.com/zpm-zsh/undollar"
   "https://github.com/zsh-users/zsh-autosuggestions"
   "https://github.com/zsh-users/zsh-history-substring-search"
-  "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-  "https://github.com/unixorn/git-extra-commands.git"
+  "https://github.com/zsh-users/zsh-syntax-highlighting"
 )
 
 for repo in "${repos[@]}"; do

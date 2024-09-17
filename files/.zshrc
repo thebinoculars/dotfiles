@@ -3,31 +3,27 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnosterzak"
 
 plugins=(
-  alias-finder
-  colored-man-pages
+  cmdtime
   copybuffer
   copyfile
   copypath
   dircycle
   dotenv
-  extract
   fzf
+  fzf-tab
   git
   git-extra-commands
   git-extras
   safe-paste
   sudo
+  undollar
+  you-should-use
   zsh-autosuggestions
   zsh-history-substring-search
   zsh-syntax-highlighting
 )
 
 zstyle ':omz:update' mode auto
-zstyle ':omz:plugins:alias-finder' autoload yes
-zstyle ':omz:plugins:alias-finder' longer yes
-zstyle ':omz:plugins:alias-finder' exact yes
-zstyle ':omz:plugins:alias-finder' cheaper yes
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -35,9 +31,6 @@ source $ZSH/oh-my-zsh.sh
 source "$HOME/.zsh/.alias"
 source "$HOME/.zsh/.export"
 source "$HOME/.zsh/.function"
-
-# carapace
-source <(carapace _carapace)
 
 # fx
 source <(fx --comp zsh)
