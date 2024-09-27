@@ -56,7 +56,7 @@ target = "/usr/local/bin/mpm"
 
 ["mikefarah/yq"]
 target = "/usr/local/bin/yq"
-asset_filters = [".tar.gz"]
+asset_filters = ["^.tar.gz"]
 
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
