@@ -20,6 +20,7 @@ jq
 lnav
 lolcat
 magic-wormhole
+mkcert
 most
 nala
 nginx

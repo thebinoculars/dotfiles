@@ -50,7 +50,7 @@ alias dcp="docker compose ps"
 alias dcu="docker compose up -d"
 alias dcub="docker compose up -d --build"
 alias dcd="docker compose down"
-alias dcl="docker compose logs -f -n 100"
+alias dcl="docker compose logs --no-log-prefix -f -n 100"
 alias dcr="docker compose restart"
 
 # yarn

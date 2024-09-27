@@ -51,6 +51,13 @@ target = "/usr/local/bin/lazysql"
 target = "/usr/local/bin/atac"
 asset_filters = ["gnu"]
 
+["kdeldycke/meta-package-manager"]
+target = "/usr/local/bin/mpm"
+
+["mikefarah/yq"]
+target = "/usr/local/bin/yq"
+asset_filters = [".tar.gz"]
+
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
 
