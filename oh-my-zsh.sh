@@ -8,10 +8,10 @@ fi
 echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "Installing agnosterzak theme..."
-curl http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme -Lo "$HOME/.oh-my-zsh/themes/agnosterzak.zsh-theme"
+# theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-echo "Installing Zsh plugins..."
+# plugins
 repos=(
   "https://github.com/Aloxaf/fzf-tab"
   "https://github.com/MichaelAquilina/zsh-you-should-use"
@@ -27,9 +27,10 @@ for repo in "${repos[@]}"; do
   git clone "$repo" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$(basename "$repo" .git)"
 done
 
-# Setup plugins
+# asdf
 git clone https://github.com/asdf-vm/asdf ~/.asdf
 
+# fzf
 tmp_dir=$(mktemp -d)
 git clone https://github.com/BartSte/fzf-help.git $tmp_dir
 $tmp_dir/install
