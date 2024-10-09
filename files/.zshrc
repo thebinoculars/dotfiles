@@ -60,3 +60,6 @@ eval "$(zoxide init zsh)"
 
 # p10k
 [[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+
+# fastfetch
+fastfetch

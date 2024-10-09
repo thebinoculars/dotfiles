@@ -1,5 +1,13 @@
 #!/bin/bash
 
+cd() {
+	builtin cd "$@"
+	current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
+  if [ "$current_repository" ] && [ "$current_repository" != "$last_repository" ]; then
+    onefetch -E --no-title --no-color-palette
+	fi
+}
+
 ecs_exec() {
   if [ -z "$1" ]; then
     echo "Missing ECS name"
