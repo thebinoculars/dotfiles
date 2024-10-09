@@ -1,0 +1,118 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "Windows"
+  },
+  "display": {
+    "separator": "",
+    "pipe": false,
+    "key": {
+      "width": 14
+    },
+    "color": {
+      "keys": "magenta",
+      "output": "white"
+    },
+    "bar": {
+      "borderLeft": "",
+      "borderRight": "",
+      "charElapsed": "█",
+      "charTotal": "░",
+      "width": 20
+    },
+    "percent": {
+      "type": 3
+    },
+    "constants": [
+      "───────────────────────────────────────────────────────────────────────────",
+      "│\u001b[75C│\u001b[75D"
+    ]
+  },
+  "modules": [
+    {
+      "format": "{#1}{#keys}╭{$1}╮",
+      "type": "title"
+    },
+    {
+      "type": "users",
+      "key": "{$2} User",
+      "myselfOnly": true
+    },
+    {
+      "type": "uptime",
+      "key": "{$2} Uptime"
+    },
+    {
+      "type": "datetime",
+      "key": "{$2} Current"
+    },
+    {
+      "type": "weather",
+      "key": "{$2} Weather",
+      "timeout": 1000
+    },
+    {
+      "format": "{#1}{#keys}├{$1}┤",
+      "type": "custom"
+    },
+    {
+      "type": "os",
+      "key": "{$2} OS"
+    },
+    {
+      "type": "host",
+      "key": "{$2} Host"
+    },
+    {
+      "type": "locale",
+      "key": "{$2} Locale"
+    },
+    {
+      "type": "cpu",
+      "key": "{$2} Processor"
+    },
+    {
+      "type": "cpuusage",
+      "key": "{$2} CPU"
+    },
+    {
+      "type": "memory",
+      "key": "{$2} Memory"
+    },
+    {
+      "type": "swap",
+      "key": "{$2} Swap"
+    },
+    {
+      "type": "disk",
+      "key": "{$2} Disk"
+    },
+    {
+      "type": "monitor",
+      "key": "{$2} Monitor"
+    },
+    {
+      "type": "netio",
+      "key": "{$2} Network"
+    },
+    {
+      "type": "publicip",
+      "key": "{$2} Public IP"
+    },
+    {
+      "type": "localip",
+      "key": "{$2} Local IP",
+      "showMac": true,
+      "showSpeed": true,
+      "showFlags": true
+    },
+    {
+      "type": "dns",
+      "key": "{$2} DNS"
+    },
+    {
+      "format": "{#1}{#keys}╰{$1}╯",
+      "type": "custom"
+    }
+  ]
+}
