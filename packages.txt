@@ -8,7 +8,6 @@ duf
 fd-find
 ffmpeg
 figlet
-fonts-powerline
 fzf
 gdu
 git-extras
@@ -33,7 +32,6 @@ rsync
 termshark
 thefuck
 tmate
-ttf-ancient-fonts
 unzip
 visidata
 xsel
