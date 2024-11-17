@@ -65,6 +65,9 @@ target = "/usr/local/bin/csvq"
 target = "/usr/local/bin/redis-tui"
 asset_filters = ["^arm"]
 
+["nektos/act"]
+target = "/usr/local/bin/act"
+
 ["ouch-org/ouch"]
 target = "/usr/local/bin/ouch"
 asset_filters = ["gnu"]

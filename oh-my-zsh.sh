@@ -39,9 +39,6 @@ for repo in "${repos[@]}"; do
   git clone "$repo" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$(basename "$repo" .git)"
 done
 
-# asdf
-git clone https://github.com/asdf-vm/asdf "$HOME/.asdf"
-
 # fzf
 tmp_dir=$(mktemp -d)
 git clone https://github.com/BartSte/fzf-help.git $tmp_dir
