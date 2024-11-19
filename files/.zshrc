@@ -45,9 +45,6 @@ source /usr/share/fzf-help/fzf-help.zsh
 zle -N fzf-help-widget
 bindkey "^A" fzf-help-widget
 
-# mpm
-eval "$(_MPM_COMPLETE=zsh_source mpm)"
-
 # the fuck
 eval $(thefuck --alias)
 

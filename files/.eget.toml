@@ -51,9 +51,6 @@ target = "/usr/local/bin/lazysql"
 target = "/usr/local/bin/atac"
 asset_filters = ["gnu"]
 
-["kdeldycke/meta-package-manager"]
-target = "/usr/local/bin/mpm"
-
 ["mikefarah/yq"]
 target = "/usr/local/bin/yq"
 asset_filters = ["^.tar.gz"]
@@ -97,6 +94,10 @@ target = "/usr/local/bin/gron"
 ["TomWright/dasel"]
 target = "/usr/local/bin/dasel"
 asset_filters = ["linux_amd64", "gz"]
+
+["trntv/sshed"]
+target = "/usr/local/bin/sshed"
+asset_filters = ["tar.gz"]
 
 ["wagoodman/dive"]
 target = "/usr/local/bin/dive"
