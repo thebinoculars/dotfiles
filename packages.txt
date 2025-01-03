@@ -5,6 +5,7 @@ build-essential
 cmatrix
 crudini
 duf
+entr
 fd-find
 ffmpeg
 figlet
@@ -18,7 +19,6 @@ jc
 jq
 lnav
 lolcat
-magic-wormhole
 mkcert
 most
 nala

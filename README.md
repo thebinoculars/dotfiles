@@ -1,4 +1,4 @@
-# Hero's dotfiles
+# Hero's dotfiles (Ubuntu 22.04)
 
 ## Installation
 

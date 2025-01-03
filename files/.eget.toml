@@ -84,6 +84,9 @@ target = "/usr/local/bin/mprocs"
 target = "/usr/local/bin/rustscan"
 asset_filters = ["zip"]
 
+["sachaos/viddy"]
+target = "/usr/local/bin/viddy"
+
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
 asset_filters = ["gnu", "zip"]
