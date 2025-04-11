@@ -81,11 +81,16 @@ target = "/usr/local/bin"
 target = "/usr/local/bin/mprocs"
 
 ["RustScan/RustScan"]
+all = true
 target = "/usr/local/bin/rustscan"
 asset_filters = ["zip"]
 
 ["sachaos/viddy"]
 target = "/usr/local/bin/viddy"
+
+["svenstaro/miniserve"]
+target = "/usr/local/bin/miniserve"
+asset_filters = ["gnu"]
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
