@@ -67,3 +67,59 @@ yy() {
 	fi
 	rm -f -- "$tmp"
 }
+
+sync_with_rclone() {
+  for arg in "$@"; do
+    case $arg in
+      --user=*)
+        USERNAME="${arg#*=}"
+        shift
+        ;;
+      --remote=*)
+        REMOTE="${arg#*=}"
+        shift
+        ;;
+      --pull)
+        DIRECTION="pull"
+        shift
+        ;;
+      *)
+        echo "❌ Unknown option: $arg"
+        return 1
+        ;;
+    esac
+  done
+
+  if [ -z "$USERNAME" ]; then
+    echo "❌ Missing required argument: --user=<WindowsUsername>"
+    return 1
+  fi
+
+  REMOTE="${REMOTE:-Google}"
+  DIRECTION="${DIRECTION:-push}" 
+
+  echo "👤 User: $USERNAME"
+  echo "☁️ Remote: $REMOTE"
+  echo "🔁 Direction: $DIRECTION"
+
+  for DIR in Documents Music Pictures Videos; do
+    LOCAL_PATH="/mnt/c/Users/${USERNAME}/${DIR}"
+    REMOTE_PATH="${REMOTE}:/${DIR}"
+
+    if [ "$DIRECTION" = "pull" ]; then
+      SRC="$REMOTE_PATH"
+      DEST="$LOCAL_PATH"
+      echo "⬇️  Syncing REMOTE → LOCAL: $SRC → $DEST"
+    else
+      SRC="$LOCAL_PATH"
+      DEST="$REMOTE_PATH"
+      echo "⬆️  Syncing LOCAL → REMOTE: $SRC → $DEST"
+    fi
+
+    rclone sync "$SRC" "$DEST" \
+      -P \
+      --exclude "desktop.ini" \
+      --exclude ".*" \
+      --local-no-set-modtime
+  done
+}
