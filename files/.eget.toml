@@ -58,6 +58,10 @@ asset_filters = ["^.tar.gz"]
 ["mithrandie/csvq"]
 target = "/usr/local/bin/csvq"
 
+["mrjackwills/havn"]
+target = "/usr/local/bin/havn"
+asset_filters = ["zip"]
+
 ["mylxsw/redis-tui"]
 target = "/usr/local/bin/redis-tui"
 asset_filters = ["^arm"]
@@ -80,12 +84,12 @@ target = "/usr/local/bin"
 ["pvolok/mprocs"]
 target = "/usr/local/bin/mprocs"
 
-["RustScan/RustScan"]
-target = "/usr/local/bin/rustscan"
-asset_filters = ["zip"]
-
 ["sachaos/viddy"]
 target = "/usr/local/bin/viddy"
+
+["svenstaro/miniserve"]
+target = "/usr/local/bin/miniserve"
+asset_filters = ["gnu"]
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
@@ -109,6 +113,10 @@ asset_filters = [".tar.gz"]
 ["xo/usql"]
 target = "/usr/local/bin/usql"
 asset_filters = ["^static"]
+
+["yt-dlp/yt-dlp"]
+target = "/usr/local/bin/yt-dlp"
+asset_filters = ["^aarch64", "^armv7l"]
 
 ["yudai/gotty"]
 target = "/usr/local/bin/gotty"
