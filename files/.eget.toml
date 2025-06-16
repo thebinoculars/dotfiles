@@ -11,10 +11,6 @@ target = "/usr/local/bin/ugm"
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
 
-["asdf-vm/asdf"]
-target = "/usr/local/bin/asdf"
-all = true
-
 ["benibela/xidel"]
 target = "/usr/local/bin/xidel"
 
@@ -94,10 +90,6 @@ target = "/usr/local/bin/mprocs"
 
 ["sachaos/viddy"]
 target = "/usr/local/bin/viddy"
-
-["svenstaro/miniserve"]
-target = "/usr/local/bin/miniserve"
-asset_filters = ["gnu"]
 
 ["sxyazi/yazi"]
 target = "/usr/local/bin/yazi"
