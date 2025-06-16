@@ -11,6 +11,9 @@ target = "/usr/local/bin/ugm"
 target = "/usr/local/bin/agg"
 asset_filters = ["gnu"]
 
+["asdf-vm/asdf"]
+target = "/usr/local/bin/asdf"
+
 ["benibela/xidel"]
 target = "/usr/local/bin/xidel"
 
@@ -30,6 +33,10 @@ asset_filters = ["gnu"]
 
 ["F1bonacc1/process-compose"]
 target = "/usr/local/bin/process-compose"
+
+["hatoo/oha"]
+target = "/usr/local/bin/oha"
+asset_filters = ["^-pgo"]
 
 ["jesseduffield/lazygit"]
 target = "/usr/local/bin/lazygit"
