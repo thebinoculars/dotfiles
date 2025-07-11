@@ -17,6 +17,7 @@ hyperfine
 iredis
 jc
 jq
+libssl-dev
 lnav
 lolcat
 mkcert
