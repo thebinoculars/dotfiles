@@ -16,7 +16,7 @@ setup_dotfiles() {
   fi
 
   echo "Cloning $DOTFILES_DIR..."
-  git clone https://github.com/antiheroguy/dotfiles.git "$DOTFILES_DIR"
+  git clone https://github.com/thebinoculars/dotfiles.git "$DOTFILES_DIR"
 
   find "$DOTFILES_DIR/files" -type f | while read -r file; do
     relative_path="${file#$DOTFILES_DIR/files/}"
