@@ -119,7 +119,7 @@ asset_filters = ["^static"]
 
 ["yt-dlp/yt-dlp"]
 target = "/usr/local/bin/yt-dlp"
-asset_filters = ["^aarch64", "^armv7l"]
+asset_filters = ["yt-dlp_linux", "^zip", "^aarch64", "^armv7l"]
 
 ["yudai/gotty"]
 target = "/usr/local/bin/gotty"
