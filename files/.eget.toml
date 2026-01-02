@@ -1,6 +1,9 @@
 [global]
 upgrade_only = true
 
+["Adembc/lazyssh"]
+target = "/usr/local/bin/lazyssh"
+
 ["antonmedv/fx"]
 target = "/usr/local/bin/fx"
 
