@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
