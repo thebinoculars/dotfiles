@@ -80,7 +80,6 @@ fselect:
   method: brew
 fx:
   description: An interactive terminal tool for exploring and processing JSON.
-  method: brew
 fzf:
   description: A general-purpose command-line fuzzy finder.
   method: apt
@@ -181,7 +180,6 @@ nmap:
 nvm:
   description: A version manager for Node.js.
 oh-my-zsh:
-  check: [ -d "$HOME/.oh-my-zsh" ]
   depends_on:
     - git
     - curl
@@ -259,7 +257,6 @@ termshark:
   method: apt
 thefuck:
   description: Corrects previous console commands automatically.
-  method: apt
 tmate:
   description: A terminal sharing tool built on tmux.
   method: apt
@@ -314,7 +311,6 @@ zip:
   method: apt
 zoxide:
   description: A smarter cd command that learns your habits.
-  method: apt
 zsh:
   description: A powerful shell with scripting and customization features.
   method: apt

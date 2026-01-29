@@ -14,10 +14,14 @@
       "output": "cyan"
     },
     "bar": {
-      "borderLeft": "",
-      "borderRight": "",
-      "charElapsed": "█",
-      "charTotal": "░",
+      "border": {
+        "left": "",
+        "right": ""
+      },
+      "char": {
+        "elapsed": "█",
+        "total": "░"
+      },
       "width": 20
     },
     "percent": {
