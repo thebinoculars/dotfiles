@@ -91,7 +91,7 @@ git:
   method: apt
   variables:
     GIT_EMAIL: email@example.com
-    GIT_USER: username
+    GIT_USERNAME: username
 git-extras:
   description: A collection of useful Git extensions.
   method: apt

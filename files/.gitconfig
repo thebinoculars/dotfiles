@@ -8,7 +8,7 @@
   up = "!f() { git checkout $1 && git pull origin $1; }; f"
   prune = "!f() { git branch | grep -v "$1" | xargs git branch -D; }; f"
 [user]
-  name = $GIT_USER
+  name = $GIT_USERNAME
   email = $GIT_EMAIL
 [pull]
   rebase = true
