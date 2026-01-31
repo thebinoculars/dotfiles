@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# navigation
-alias -- -="cd -"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-# docker
 alias dp="docker ps"
 alias dpa="docker ps -a"
 alias dil="docker images ls"
@@ -20,11 +12,3 @@ alias dcub="docker compose up -d --build"
 alias dcd="docker compose down"
 alias dcl="docker compose logs --no-log-prefix -f -n 100"
 alias dcr="docker compose restart"
-
-# yarn
-alias ya="yarn add"
-alias yad="yarn add --dev"
-alias yb="yarn build"
-alias yd="yarn dev"
-alias yr="yarn remove"
-alias ys="yarn start"

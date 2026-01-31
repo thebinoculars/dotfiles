@@ -4,184 +4,253 @@ readonly GREEN='\033[0;32m'
 readonly BLUE='\033[0;34m'
 readonly RED='\033[0;31m'
 readonly NC='\033[0m'
-readonly CONFIG_FILE="config.yml"
-readonly ZSH_TEMP_FILE="/tmp/dotfiles_zshrc.tmp"
+readonly CONFIG_FILE="config.ini"
 
 declare -a PROCESSED=()
 declare -a DOTFILES_ENV_VARS=()
+declare -a INSTALLED_PACKAGES=()
 
 log() { echo -e "${BLUE}[INFO]${NC} $1"; }
 success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
-append_zsh() {
-	cat >>"$ZSH_TEMP_FILE"
+download_resources() {
+	log "Preparing resources..."
+	
+	# Check if running locally (has .git or files directory)
+	if [ -d ".git" ] || [ -d "files" ]; then
+		log "Using local files"
+		# Ensure config exists locally
+		[ ! -f "$CONFIG_FILE" ] && { error "Local config.ini not found"; exit 1; }
+	else
+		log "Cloning repository..."
+		# Clone to temp directory
+		local temp_dir=$(mktemp -d)
+		trap 'rm -rf "$temp_dir"' EXIT
+		
+		git clone https://github.com/thebinoculars/dotfiles.git "$temp_dir" || {
+			error "Failed to clone repository"
+			exit 1
+		}
+		
+		# Copy files to current directory
+		cp -r "$temp_dir"/* . 2>/dev/null || true
+		cp -r "$temp_dir"/.* . 2>/dev/null || true
+		
+		log "Repository cloned successfully"
+	fi
+	
+	# Verify required files exist
+	[ ! -f "$CONFIG_FILE" ] && { error "config.ini not found"; exit 1; }
+	[ ! -d "files" ] && { error "files directory not found"; exit 1; }
 }
-export -f append_zsh
+
+get_config() {
+	local pkg="$1" key="$2"
+	awk -v section="[$pkg]" -v key="$key" '
+		$0 == section { found=1; next }
+		/^\[/ && found { exit }
+		found && $0 ~ "^" key "=" { sub("^" key "=", ""); print; exit }
+	' "$CONFIG_FILE"
+}
 
 install_by_method() {
-	local pkg_name="$1"
-	local method="$2"
-	local url="$3"
-
-	case "$method" in
-	apt)
-		sudo apt-get install -y "$pkg_name"
-		;;
-	brew)
-		brew install "$pkg_name"
-		;;
-	snap)
-		sudo snap install "$pkg_name"
-		;;
-	eget)
-		[ "$url" != "null" ] && sudo eget "$url" --to /usr/local/bin/ || error "URL required for eget method in $pkg_name"
-		;;
-	*)
-		local script_file="scripts/$pkg_name.sh"
-		if [ -f "$script_file" ]; then
-			chmod +x "$script_file" && source "$script_file"
+	local pkg="$1" method="$2" url="$3"
+	
+	if [ -z "$method" ]; then
+		run_script "$pkg"
+	else
+		case "$method" in
+		apt) sudo apt-get install -y "$pkg" ;;
+		brew) brew install "$pkg" ;;
+		snap) sudo snap install "$pkg" ;;
+		eget) if [ -n "$url" ]; then
+			sudo eget "$url" --to /usr/local/bin/
 		else
-			error "Script not found: $script_file"
+			error "URL required for eget: $pkg"
+			return 1
+		fi ;;
+		script) run_script "$pkg" ;;
+		*) 
+			# If method is not recognized, treat it as a direct command
+			eval "$method" ;;
+		esac
+	fi
+}
+
+run_script() {
+	local pkg="$1"
+	local script="scripts/$pkg.sh"
+	if [ -f "$script" ]; then
+		chmod +x "$script" && source "$script"
+	else
+		error "No script found for $pkg"
+		return 1
+	fi
+}
+
+add_all_zsh_sources() {
+	# Copy all .zsh files first
+	if [ -d "files/.zsh" ]; then
+		mkdir -p "$HOME/.zsh"
+		cp -r files/.zsh/* "$HOME/.zsh/" 2>/dev/null || true
+	fi
+	
+	# Add source commands for installed packages
+	local zshrc="$HOME/.zshrc"
+	for pkg in "${INSTALLED_PACKAGES[@]}"; do
+		local zsh_file="$HOME/.zsh/$pkg.zsh"
+		if [ -f "$zsh_file" ]; then
+			grep -q "source ~/.zsh/$pkg.zsh" "$zshrc" 2>/dev/null || {
+				echo "source ~/.zsh/$pkg.zsh" >> "$zshrc"
+				log "Added source for $pkg.zsh"
+			}
 		fi
-		;;
-	esac
-}
-
-bootstrap() {
-	log "Installing bootstrap packages..."
-	
-	command -v brew >/dev/null 2>&1 || install_by_method "brew"
-	command -v eget >/dev/null 2>&1 || install_by_method "eget" "brew"
-	command -v yq >/dev/null 2>&1 || install_by_method "yq" "brew"
-	command -v gum >/dev/null 2>&1 || install_by_method "gum" "brew"
-	command -v zsh >/dev/null 2>&1 || install_by_method "zsh" "apt"
-	[ ! -d "$HOME/.oh-my-zsh" ] && install_by_method "oh-my-zsh"
-	[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && install_by_method "p10k"
-	
-	PROCESSED+=("brew" "eget" "yq" "gum" "zsh" "oh-my-zsh" "p10k")
-}
-
-get_package_config() {
-	local pkg_name="$1"
-	local key="$2"
-	yq -r ".\"$pkg_name\".\"$key\"" "$CONFIG_FILE" 2>/dev/null || echo "null"
-}
-
-load_package_variables() {
-	local pkg_name="$1"
-	local var_keys=$(yq -r ".\"$pkg_name\".variables | keys | .[]" "$CONFIG_FILE" 2>/dev/null || true)
-	
-	for key in $var_keys; do
-		local value=$(yq -r ".\"$pkg_name\".variables.\"$key\"" "$CONFIG_FILE")
-		
-		if [ -z "${!key+x}" ]; then
-			export "$key=$value"
-		fi
-		
-		DOTFILES_ENV_VARS+=("\$$key")
-	done
-}
-
-install_dependencies() {
-	local pkg_name="$1"
-	local deps=$(yq -r ".\"$pkg_name\".depends_on[]" "$CONFIG_FILE" 2>/dev/null || true)
-	
-	for dep in $deps; do
-		install_package "$dep"
 	done
 }
 
 install_package() {
-	local pkg_name="$1"
+	local pkg="$1"
 	
-	if [[ " ${PROCESSED[*]} " =~ " ${pkg_name} " ]]; then
-		return
+	[[ " ${PROCESSED[*]} " =~ " $pkg " ]] && return
+	
+	log "Installing $pkg..."
+	
+	# Load variables
+	local vars=$(get_config "$pkg" "variables")
+	if [ -n "$vars" ]; then
+		IFS=',' read -ra pairs <<< "$vars"
+		for pair in "${pairs[@]}"; do
+			local key="${pair%=*}" value="${pair#*=}"
+			# Use env var if set, otherwise use config default
+			if [ -n "${!key+x}" ]; then
+				log "Using env var $key=${!key}"
+			else
+				export "$key=$value"
+			fi
+			DOTFILES_ENV_VARS+=("\$$key")
+		done
 	fi
 	
-	log "Installing $pkg_name..."
+	# Install dependencies
+	local deps=$(get_config "$pkg" "depends_on")
+	if [ -n "$deps" ]; then
+		IFS=',' read -ra dep_array <<< "$deps"
+		for dep in "${dep_array[@]}"; do
+			install_package "$dep"
+		done
+	fi
 	
-	load_package_variables "$pkg_name"
-	install_dependencies "$pkg_name"
+	# Check if already installed - default to command -v
+	local check_cmd=$(get_config "$pkg" "check")
+	[ -z "$check_cmd" ] && check_cmd="command -v $pkg"
 	
-	local method=$(get_package_config "$pkg_name" "method")
-	local url=$(get_package_config "$pkg_name" "url")
+	local skip_install=false
+	if [[ "$check_cmd" =~ ^(command\ -v\ |which\ |\[\ -[a-z]\ ) ]]; then
+		if eval "$check_cmd" >/dev/null 2>&1; then
+			log "$pkg already installed, skipping"
+			skip_install=true
+		fi
+	else
+		error "Unsafe check command for $pkg: $check_cmd"
+		return 1
+	fi
 	
-	install_by_method "$pkg_name" "$method" "$url"
+	# Install package if needed
+	if [ "$skip_install" = false ]; then
+		local method=$(get_config "$pkg" "method")
+		local url=$(get_config "$pkg" "url")
+		
+		if install_by_method "$pkg" "$method" "$url"; then
+			success "Installed $pkg"
+		else
+			error "Failed to install $pkg"
+			return 1
+		fi
+	else
+		success "$pkg already available"
+	fi
 	
-	success "Installed $pkg_name"
-	PROCESSED+=("$pkg_name")
+	# Don't add zsh source here - will be done after process_files
+	
+	PROCESSED+=("$pkg")
+	INSTALLED_PACKAGES+=("$pkg")
 }
 
-load_all_variables() {
-	log "Loading all variables..."
-	local pkgs=$(yq -r 'to_entries[].key' "$CONFIG_FILE")
+bootstrap() {
+	log "Installing bootstrap packages..."
+	install_package "brew"
+	install_package "eget"
+	install_package "gum"
+	install_package "zsh"
+	install_package "oh-my-zsh"
+	install_package "p10k"
+}
+
+process_files() {
+	log "Processing config files..."
 	
+	# Collect all variables
+	declare -A VARS
+	local pkgs=$(grep -o '^\[[^]]*\]' "$CONFIG_FILE" | tr -d '[]')
 	for pkg in $pkgs; do
-		load_package_variables "$pkg"
+		local vars=$(get_config "$pkg" "variables")
+		[ -n "$vars" ] && {
+			IFS=',' read -ra pairs <<< "$vars"
+			for pair in "${pairs[@]}"; do
+				local key="${pair%=*}" value="${pair#*=}"
+				# Use env var if set, otherwise use config default
+				if [ -n "${!key+x}" ]; then
+					VARS["$key"]="${!key}"
+				else
+					export "$key=$value"
+					VARS["$key"]="$value"
+				fi
+			done
+		}
 	done
-}
-
-process_all_mappings() {
-	log "Copying files and replacing managed env vars..."
 	
+	# Process config files (exclude .zsh directory)
 	[ ! -d "files" ] && return
 	
-	find files -type f | while read -r src; do
+	find files -type f -not -path "files/.zsh/*" | while read -r src; do
 		local rel="${src#files/}"
 		local dest="$HOME/$rel"
 		
 		mkdir -p "$(dirname "$dest")"
-		[ -f "$dest" ] && cp "$dest" "$dest.bak"
+		[ -f "$dest" ] && cp "$dest" "$dest.bak.$(date +%s)"
 		
+		# Copy file and replace variables
 		cp "$src" "$dest"
 		
-		if [ -n "$ENV_SUBST_VARS" ]; then
-			envsubst "$ENV_SUBST_VARS" <"$dest" >"$dest.tmp" && mv "$dest.tmp" "$dest"
-		fi
+		# Safe variable replacement with proper escaping
+		for var in "${!VARS[@]}"; do
+			local escaped_value
+			escaped_value=$(printf '%s\n' "${VARS[$var]}" | sed 's/[[\.*^$()+?{|]/\\&/g')
+			sed -i "s/\$$var/$escaped_value/g" "$dest"
+		done
 	done
 }
 
-add_package_sources() {
-	log "Appending zsh config to .zshrc..."
-	
-	local zshrc="$HOME/.zshrc"
-	
-	if [ -s "$ZSH_TEMP_FILE" ]; then
-		{
-			echo ""
-			cat "$ZSH_TEMP_FILE"
-		} >>"$zshrc"
-	fi
-	
-	success "Zsh config updated"
-}
-
 main() {
-	[ ! -f "$CONFIG_FILE" ] && error "Missing config.yml" && exit 1
-	
-	> "$ZSH_TEMP_FILE"
-	
+	download_resources
 	bootstrap
 	
 	log "Select packages to install"
 	local selected=$(
-		yq -r 'to_entries[] | .key + " - " + .value.description' "$CONFIG_FILE" |
+		awk -F= '/^\[/{pkg=substr($0,2,length($0)-2)} /^description=/{print pkg " - " $2}' "$CONFIG_FILE" |
 			gum choose --no-limit --height 15 |
 			awk -F ' - ' '{print $1}'
 	)
 	
-	[ -z "$selected" ] && log "Nothing selected" && exit 0
+	[ -z "$selected" ] && { log "Nothing selected"; exit 0; }
 	
 	for pkg in $selected; do
 		install_package "$pkg"
 	done
 	
-	load_all_variables
-	ENV_SUBST_VARS=$(printf '%s ' "${DOTFILES_ENV_VARS[@]}")
-	
-	process_all_mappings
-	add_package_sources
+	process_files
+	add_all_zsh_sources
 	
 	success "Dotfiles installation complete!"
 }

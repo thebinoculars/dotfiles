@@ -31,22 +31,13 @@ zstyle ':omz:update' mode auto
 
 source $ZSH/oh-my-zsh.sh
 
-# dotfiles
-source "$HOME/.zsh/.alias"
-source "$HOME/.zsh/.export"
-source "$HOME/.zsh/.function"
+alias -- -="cd -"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
-# fzf-help configuration
-source /usr/share/fzf-help/fzf-help.zsh
-zle -N fzf-help-widget
-bindkey "^A" fzf-help-widget
-
-# p10k
-export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# brew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+export EDITOR="vim"
+export HISTSIZE=10000
 
 # Custom dotfiles
