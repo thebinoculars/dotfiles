@@ -90,9 +90,14 @@ add_all_zsh_sources() {
 	fi
 	
 	local zshrc="$HOME/.zshrc"
-	for pkg in "${INSTALLED_PACKAGES[@]}"; do
-		local zsh_file="$HOME/.zsh/$pkg.zsh"
-		if [ -f "$zsh_file" ]; then
+	for zsh_file in "$HOME/.zsh/"*.zsh; do
+		[ ! -f "$zsh_file" ] && continue
+		local pkg=$(basename "$zsh_file" .zsh)
+		
+		local check_cmd=$(get_config "$pkg" "check")
+		[ -z "$check_cmd" ] && check_cmd="command -v $pkg"
+		
+		if eval "$check_cmd" >/dev/null 2>&1; then
 			grep -q "source ~/.zsh/$pkg.zsh" "$zshrc" 2>/dev/null || {
 				echo "source ~/.zsh/$pkg.zsh" >> "$zshrc"
 				log "Added source for $pkg.zsh"
