@@ -138,24 +138,21 @@ install_package() {
 	local check_cmd=$(get_config "$pkg" "check")
 	[ -z "$check_cmd" ] && check_cmd="command -v $pkg"
 	
-	local skip_install=false
 	if eval "$check_cmd" >/dev/null 2>&1; then
 		log "$pkg already installed, skipping"
-		skip_install=true
+		PROCESSED[$pkg]=1
+		INSTALLED_PACKAGES+=("$pkg")
+		return
 	fi
 	
-	if [ "$skip_install" = false ]; then
-		local method=$(get_config "$pkg" "method")
-		local url=$(get_config "$pkg" "url")
-		
-		if install_by_method "$pkg" "$method" "$url"; then
-			success "Installed $pkg"
-		else
-			error "Failed to install $pkg"
-			return 1
-		fi
+	local method=$(get_config "$pkg" "method")
+	local url=$(get_config "$pkg" "url")
+	
+	if install_by_method "$pkg" "$method" "$url"; then
+		success "Installed $pkg"
 	else
-		success "$pkg already available"
+		error "Failed to install $pkg"
+		return 1
 	fi
 	
 	PROCESSED[$pkg]=1
