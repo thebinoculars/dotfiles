@@ -6,7 +6,7 @@ readonly RED='\033[0;31m'
 readonly NC='\033[0m'
 readonly CONFIG_FILE="config.ini"
 
-declare -a PROCESSED=()
+declare -A PROCESSED=()
 declare -a DOTFILES_ENV_VARS=()
 declare -a INSTALLED_PACKAGES=()
 
@@ -17,14 +17,11 @@ error() { echo -e "${RED}[ERROR]${NC} $1"; }
 download_resources() {
 	log "Preparing resources..."
 	
-	# Check if running locally (has .git or files directory)
 	if [ -d ".git" ] || [ -d "files" ]; then
 		log "Using local files"
-		# Ensure config exists locally
 		[ ! -f "$CONFIG_FILE" ] && { error "Local config.ini not found"; exit 1; }
 	else
 		log "Cloning repository..."
-		# Clone to temp directory
 		local temp_dir=$(mktemp -d)
 		trap 'rm -rf "$temp_dir"' EXIT
 		
@@ -33,14 +30,13 @@ download_resources() {
 			exit 1
 		}
 		
-		# Copy files to current directory
-		cp -r "$temp_dir"/* . 2>/dev/null || true
-		cp -r "$temp_dir"/.* . 2>/dev/null || true
+		cp -r "$temp_dir/files" .
+		cp "$temp_dir/$CONFIG_FILE" .
+		[ -d "$temp_dir/scripts" ] && cp -r "$temp_dir/scripts" .
 		
 		log "Repository cloned successfully"
 	fi
 	
-	# Verify required files exist
 	[ ! -f "$CONFIG_FILE" ] && { error "config.ini not found"; exit 1; }
 	[ ! -d "files" ] && { error "files directory not found"; exit 1; }
 }
@@ -71,9 +67,7 @@ install_by_method() {
 			return 1
 		fi ;;
 		script) run_script "$pkg" ;;
-		*) 
-			# If method is not recognized, treat it as a direct command
-			eval "$method" ;;
+		*) eval "$method" ;;
 		esac
 	fi
 }
@@ -90,13 +84,11 @@ run_script() {
 }
 
 add_all_zsh_sources() {
-	# Copy all .zsh files first
 	if [ -d "files/.zsh" ]; then
 		mkdir -p "$HOME/.zsh"
 		cp -r files/.zsh/* "$HOME/.zsh/" 2>/dev/null || true
 	fi
 	
-	# Add source commands for installed packages
 	local zshrc="$HOME/.zshrc"
 	for pkg in "${INSTALLED_PACKAGES[@]}"; do
 		local zsh_file="$HOME/.zsh/$pkg.zsh"
@@ -112,17 +104,15 @@ add_all_zsh_sources() {
 install_package() {
 	local pkg="$1"
 	
-	[[ " ${PROCESSED[*]} " =~ " $pkg " ]] && return
+	[ -n "${PROCESSED[$pkg]}" ] && return
 	
 	log "Installing $pkg..."
 	
-	# Load variables
 	local vars=$(get_config "$pkg" "variables")
 	if [ -n "$vars" ]; then
 		IFS=',' read -ra pairs <<< "$vars"
 		for pair in "${pairs[@]}"; do
 			local key="${pair%=*}" value="${pair#*=}"
-			# Use env var if set, otherwise use config default
 			if [ -n "${!key+x}" ]; then
 				log "Using env var $key=${!key}"
 			else
@@ -132,7 +122,6 @@ install_package() {
 		done
 	fi
 	
-	# Install dependencies
 	local deps=$(get_config "$pkg" "depends_on")
 	if [ -n "$deps" ]; then
 		IFS=',' read -ra dep_array <<< "$deps"
@@ -141,22 +130,15 @@ install_package() {
 		done
 	fi
 	
-	# Check if already installed - default to command -v
 	local check_cmd=$(get_config "$pkg" "check")
 	[ -z "$check_cmd" ] && check_cmd="command -v $pkg"
 	
 	local skip_install=false
-	if [[ "$check_cmd" =~ ^(command\ -v\ |which\ |\[\ -[a-z]\ ) ]]; then
-		if eval "$check_cmd" >/dev/null 2>&1; then
-			log "$pkg already installed, skipping"
-			skip_install=true
-		fi
-	else
-		error "Unsafe check command for $pkg: $check_cmd"
-		return 1
+	if eval "$check_cmd" >/dev/null 2>&1; then
+		log "$pkg already installed, skipping"
+		skip_install=true
 	fi
 	
-	# Install package if needed
 	if [ "$skip_install" = false ]; then
 		local method=$(get_config "$pkg" "method")
 		local url=$(get_config "$pkg" "url")
@@ -171,9 +153,7 @@ install_package() {
 		success "$pkg already available"
 	fi
 	
-	# Don't add zsh source here - will be done after process_files
-	
-	PROCESSED+=("$pkg")
+	PROCESSED[$pkg]=1
 	INSTALLED_PACKAGES+=("$pkg")
 }
 
@@ -190,7 +170,6 @@ bootstrap() {
 process_files() {
 	log "Processing config files..."
 	
-	# Collect all variables
 	declare -A VARS
 	local pkgs=$(grep -o '^\[[^]]*\]' "$CONFIG_FILE" | tr -d '[]')
 	for pkg in $pkgs; do
@@ -199,7 +178,6 @@ process_files() {
 			IFS=',' read -ra pairs <<< "$vars"
 			for pair in "${pairs[@]}"; do
 				local key="${pair%=*}" value="${pair#*=}"
-				# Use env var if set, otherwise use config default
 				if [ -n "${!key+x}" ]; then
 					VARS["$key"]="${!key}"
 				else
@@ -210,7 +188,6 @@ process_files() {
 		}
 	done
 	
-	# Process config files (exclude .zsh directory)
 	[ ! -d "files" ] && return
 	
 	find files -type f -not -path "files/.zsh/*" | while read -r src; do
@@ -220,13 +197,11 @@ process_files() {
 		mkdir -p "$(dirname "$dest")"
 		[ -f "$dest" ] && cp "$dest" "$dest.bak.$(date +%s)"
 		
-		# Copy file and replace variables
 		cp "$src" "$dest"
 		
-		# Safe variable replacement with proper escaping
 		for var in "${!VARS[@]}"; do
 			local escaped_value
-			escaped_value=$(printf '%s\n' "${VARS[$var]}" | sed 's/[[\.*^$()+?{|]/\\&/g')
+			escaped_value=$(printf '%s\n' "${VARS[$var]}" | sed 's/[][\/.^$*+?{}()|]/\\&/g')
 			sed -i "s/\$$var/$escaped_value/g" "$dest"
 		done
 	done
