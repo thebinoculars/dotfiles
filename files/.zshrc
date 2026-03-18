@@ -39,5 +39,6 @@ alias .....="cd ../../../.."
 
 export EDITOR="vim"
 export HISTSIZE=10000
+export PATH="$HOME/.local/bin:$PATH"
 
 # Custom dotfiles

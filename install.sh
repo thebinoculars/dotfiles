@@ -61,7 +61,8 @@ install_by_method() {
 		brew) brew install "$pkg" ;;
 		snap) sudo snap install "$pkg" ;;
 		eget) if [ -n "$url" ]; then
-			sudo eget "$url" --to /usr/local/bin/
+			mkdir -p "$HOME/.local/bin"
+			eget "$url" --to "$HOME/.local/bin/"
 		else
 			error "URL required for eget: $pkg"
 			return 1
@@ -230,6 +231,10 @@ main() {
 	add_all_zsh_sources
 	
 	success "Dotfiles installation complete!"
+
+	if gum confirm "Reload terminal now?"; then
+		exec zsh
+	fi
 }
 
 main
