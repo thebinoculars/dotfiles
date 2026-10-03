@@ -1,0 +1,39 @@
+[core]
+  editor = vim
+  pager = "if command -v delta >/dev/null 2>&1; then exec delta; else exec less; fi"
+  autocrlf = input
+[format]
+  pretty = full
+[alias]
+  up = "!f() { git checkout $1 && git pull origin $1; }; f"
+  clean-branches = "!f() { cur=$(git branch --show-current); keep=${1:-$cur}; git for-each-ref --format='%(refname:short)' refs/heads/ | grep -vxF -e \"$cur\" -e \"$keep\" | xargs -r git branch -D; }; f"
+[user]
+  name = {{GIT_USERNAME}}
+  email = {{GIT_EMAIL}}
+[pull]
+  rebase = true
+[rebase]
+  autoStash = true
+[fetch]
+  prune = true
+[grep]
+  lineNumber = true
+[credential]
+  helper = store
+[pager]
+  branch = false
+[interactive]
+  diffFilter = "if command -v delta >/dev/null 2>&1; then exec delta --color-only --features=interactive; else exec cat; fi"
+[delta]
+  features = decorations
+  side-by-side = true
+[delta "interactive"]
+  keep-plus-minus-markers = false
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
